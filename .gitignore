@@ -4,3 +4,4 @@
 .pydevproject
 .project
 .vagrant
+docroot/media/**
