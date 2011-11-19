@@ -252,4 +252,4 @@ def output_image(image, filename):
 
 class ImageTrans():
     def main(self, img,ratio):
-        create_mosaic(img, 'test.jpg', ratio)
+        return create_mosaic(img, 'test.jpg', ratio)
