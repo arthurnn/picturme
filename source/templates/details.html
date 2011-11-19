@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <section>
+        <div class="show-grid row">
+            <!-- LEFT SIDE -->
+            <div class="span9">
+                <div id="picture">
+                    <img src="http://placehold.it/500x500" alt="" />
+                </div>
+                <p>
+                    Share on: <a href="#" class="share-tw">Twitter</a> | <a href="#" class="share-fb">Facebook</a> | <a href="#" class="share-gp">Google+</a>
+                </p>
+            </div>
+            <!-- RIGHT SIDE -->
+            <div class="span5 sidebar">
+                <!-- <h2>Metadata</h2> -->
+                <div id="metadata-container" class="well">
+                    <ul class="media-grid">
+                        <li>
+                            <a href="#">
+                                <img class="thumbnail" src="http://placehold.it/100x100" alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img class="thumbnail" src="http://placehold.it/100x100" alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img class="thumbnail" src="http://placehold.it/100x100" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+      window.fbAsyncInit = function() {
+        $(".share-fb").click(function(){
+            FB.ui({
+                method: 'feed',
+                name: 'Facebook Dialogs',
+                link: 'http://developers.facebook.com/docs/reference/dialogs/',
+                picture: 'http://fbrell.com/f8.jpg',
+                caption: 'Reference Documentation',
+                description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+                },
+                function(response) {
+                    if (response && response.post_id) {
+                        console.log('Post was published.');
+                    } else {
+                        console.log('Post was not published.');
+                    }
+            });
+            return false;
+        });
+      };
+
+      // Load the SDK Asynchronously
+      (function(d){
+         var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         d.getElementsByTagName('head')[0].appendChild(js);
+       }(document));
+    </script>
+    <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+{% endblock content %}
