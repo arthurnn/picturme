@@ -25,13 +25,13 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-        'VERSION': '1',
-    }
-}
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#        'LOCATION': '127.0.0.1:11211',
+#        'VERSION': '1',
+#    }
+#}
 
 # Keys from user 'django'
 AWS_ACCESS_KEY_ID = 'AKIAIC6VFIJCTGUNGU4A'
