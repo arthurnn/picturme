@@ -86,11 +86,11 @@ class Command(NoArgsCommand):
                 obj, created = Pixel.objects.get_or_create(r=r,g=g,b=b,pos=pos,x=0,y=0)
                 
                 if created:
-                    rr = r+g+b
-                    if rr==0: rr = 1
+                    #rr = r+g+b
+                    #if rr==0: rr = 1
                     
-                    obj.x = (float(r)/rr)*100
-                    obj.y = (float(r)/rr)*100
+                    #obj.x = (float(r)/rr)*100
+                    #obj.y = (float(r)/rr)*100
                     
                     #if pos==0:
                     filename = hashlib.md5(im.getvalue()).hexdigest()+'.jpg'

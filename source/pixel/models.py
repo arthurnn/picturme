@@ -20,3 +20,5 @@ class Pixel(models.Model):
 class UserImage(models.Model):
     pixels = models.ManyToManyField(Pixel)
     
+    
+    image = models.ImageField(upload_to='user_images',null=False,blank=False)

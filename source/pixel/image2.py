@@ -39,20 +39,22 @@ def create_mosaic(source_image, output, ratio):
                        len(source_grid) * tile_size[1]) 
         mosaic = Image.new('RGB', output_size)
         
-        width = source_image.size[0] / (tile_size[0] / size_ratio)
-        height = source_image.size[1] / (tile_size[1] / size_ratio)
-        print '%d x %d = %d' % (width, height, width * height)
+        #width = source_image.size[0] / (tile_size[0] / size_ratio)
+        #height = source_image.size[1] / (tile_size[1] / size_ratio)
+        #print '%d x %d = %d' % (width, height, width * height)
 
         #Loop through tile_grid, then compare each tile from source_image with every 
         #tile in imagepool. Find the closest match, then place that tile in place.
-        try:
-            top_down(source_grid, mosaic, tile_size)
-        except KeyboardInterrupt:
-            print 'Cancelled by user. '
-            return
-        else:
-            output_image(mosaic, output)
-            print 'Success! Generated %s' % (output)
+        #try:
+        top_down(source_grid, mosaic, tile_size)
+        #except KeyboardInterrupt:
+            #print 'Cancelled by user. '
+            #return
+        #else:
+            #output_image(mosaic, output)
+            #print 'Success! Generated %s' % (output)
+            
+        return mosaic
 
 def top_down(grid, output, tile_size):
     '''
@@ -89,11 +91,11 @@ def find_closest_match(image,cursor):
     for sub in subs:
         target_rgb.append(average_rgb(sub))
 
-    (r,g,b)=average_rgb(image)
-    rr = r+g+b
-    if rr==0: rr = 1
-    x = (float(r)/rr)*100
-    y = (float(r)/rr)*100
+    #(r,g,b)=average_rgb(image)
+    #rr = r+g+b
+    #if rr==0: rr = 1
+    #x = (float(r)/rr)*100
+    #y = (float(r)/rr)*100
     
     
     #qq = cursor.filter(x=x,y=y)
