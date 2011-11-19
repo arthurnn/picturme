@@ -31,8 +31,11 @@ def upload(request):
         mosaic = ap.main(imgFile,2)
         
         photo = UserImage()
-        fn_image = hashlib.md5(mosaic.getvalue()).hexdigest()+'.jpg'
-        photo.image.save(fn_image, ContentFile(mosaic.getvalue()), save=False)
+        sio = StringIO()
+        mosaic.save(sio,'JPEG')
+        
+        fn_image = hashlib.md5(sio.getvalue()).hexdigest()+'.jpg'
+        photo.image.save(fn_image, ContentFile(sio.getvalue()), save=False)
         photo.save()
         
     return redirect('/detail/%s'%photo.id)
