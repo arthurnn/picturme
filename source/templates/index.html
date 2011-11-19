@@ -9,7 +9,7 @@
         <h1>picture.me</h1>
         <p>upload your pics here and get an awesome mosaic from <a href="http://500px.com">500px</a> pictures!</p>
         <p>
-            <form action="/upload/" method="POST">
+            <form action="/upload/" method="POST">{% csrf_token %}
                 <div>
                     <input type="file" name="picture">
                     <input type="submit" class="btn primary" value="beam me up scotty!">
