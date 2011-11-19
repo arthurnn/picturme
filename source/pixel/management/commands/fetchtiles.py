@@ -5,7 +5,7 @@ Created on Nov 19, 2011
 '''
 import datetime
 from django.conf import settings
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.db.models import Count
 from django.core.files.base import ContentFile
 
@@ -15,12 +15,12 @@ from PIL import Image
 
 from fivehundred import FiveHundredPx
 
-from pixel.models import Pixel
+from pixel.models import Pixel,Photo
 
 
 CONSUMER_KEY = 'HedA1jeHKM2KaXWIb1lPV9bIJJu9eIh84h2s613L'
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = "Cron job to fetch images"
     
 
@@ -58,14 +58,21 @@ class Command(NoArgsCommand):
         average_blue /= maxcolors
         return (average_red, average_green, average_blue)
     
-    def handle_noargs(self, **options):
+    def handle(self, *args, **options):
         #t0 = datetime.datetime.now()
         
         api = FiveHundredPx(CONSUMER_KEY)
         
-        iiter = api.get_photos()
+        iiter = api.get_photos(feature = args[0])
         
+        
+        count = 0
         for p in iiter:
+            if count>1000:
+                break
+            count += 1
+            
+            
             url = p['image_url']
             fileIm = urllib.urlopen(url)
         
@@ -75,6 +82,11 @@ class Command(NoArgsCommand):
             arr = self.subdivide(img)
             #arr.append(img)
             
+            photo = Photo()
+            
+            filename = hashlib.md5(im.getvalue()).hexdigest()+'.jpg'
+            photo.image1.save(name=filename, content=ContentFile(im.getvalue()), save=True)
+            
             #poszfile = None
             for a in arr:
                 (r,g,b) = self.average_rgb(a)
@@ -83,9 +95,12 @@ class Command(NoArgsCommand):
                 #o_id = (o_id<<8)+g
                 #o_id = (o_id<<8)+b
                 pos = arr.index(a)
-                obj, created = Pixel.objects.get_or_create(r=r,g=g,b=b,pos=pos,x=0,y=0)
+                #obj, created = Pixel.objects.get_or_create(r=r,g=g,b=b,pos=pos,x=0,y=0)
+                pix = Pixel(r=r,g=g,b=b,pos=pos,x=0,y=0)
+                pix.photo = photo
+                pix.save()
                 
-                if created:
+                #if created:
                     #rr = r+g+b
                     #if rr==0: rr = 1
                     
@@ -93,13 +108,13 @@ class Command(NoArgsCommand):
                     #obj.y = (float(r)/rr)*100
                     
                     #if pos==0:
-                    filename = hashlib.md5(im.getvalue()).hexdigest()+'.jpg'
-                    obj.image1.save(name=filename, content=ContentFile(im.getvalue()), save=False)
+                    #filename = hashlib.md5(im.getvalue()).hexdigest()+'.jpg'
+                    #obj.image1.save(name=filename, content=ContentFile(im.getvalue()), save=False)
                         #poszfile = obj.image1.file
                     #else:
                         #obj.image1.file = poszfile
                     
-                    obj.save()
+                    #obj.save()
                 
         
         #self.stdout.write("Popular Looks reloaded, in %s" % delta_t)

@@ -124,7 +124,7 @@ def find_closest_match(image,cursor):
     pixel = cursor.get(pk=closest_id)
     
     
-    closest_tile = Image.open(StringIO(pixel.image1.file.read()))
+    closest_tile = Image.open(StringIO(pixel.photo.image1.file.read()))
     return closest_tile
     
     

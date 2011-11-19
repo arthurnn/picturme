@@ -59,7 +59,7 @@ class FiveHundredPx:
         total_pages = data['total_pages']
         
         page = data['current_page']
-       
+        
         while page <= total_pages:
         
             for p in data['photos']:
