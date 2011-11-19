@@ -12,20 +12,19 @@
 	<!-- Use the .htaccess and remove these lines to avoid edge case issues.
 	More info: h5bp.com/b/378 -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>{% block page_title %}{% trans 'Django Blank' %}{% endblock page_title %}</title>
 	<meta name="author" content="">
 	<meta name="keywords" content="{% block meta_keywords %}{% endblock meta_keywords %}">
 	<meta name="description" content="{% block meta_description %}{% endblock meta_description %}">
 	<!-- Mobile viewport optimized: j.mp/bplateviewport -->
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
-	<link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}images/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}images/favicon.png">
 	
 	<!-- CSS: implied media=all -->
 	<!-- CSS concatenated and minified via ant build script-->
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/media-queries.css">
 <!-- 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css"> -->
 	<!-- end CSS-->
 
@@ -50,13 +49,13 @@
 		<header>
 	    	<h1>
 	    		<a href="/">pictur.me</a>
-	    	</h1>
+		    </h1>
 	    </header>
 	    <div class="hero-unit">
 			{% block content %}{% endblock content %}
     	</div>
     	<footer>
-    		&copy; 2011 - <a href="http://twitter.com/!#/arthurnn89">@arthurnn89</a> &amp; <a href="http://twitter.com/!#/oliviernt">@oliviernt</a>
+    		<a href="/contact">Contact</a> &copy; 2011 <a href="http://twitter.com/#!/arthurnn89">@arthurnn89</a> &amp; <a href="http://twitter.com/#!/oliviernt">@oliviernt</a>
     	</footer>
 	</div> <!--! end of #container -->
   
