@@ -16,6 +16,10 @@ header h1 {
 header h1 a{
     color: #000;
 }
+summary{
+    display:block;
+    font-size: 18px;
+}
 #metadata-container {    
     height: 460px;
 }

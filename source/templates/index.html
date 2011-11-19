@@ -6,15 +6,16 @@
 {% endblock additional_headers %}
 
 {% block content %}
-        <h1>picture.me</h1>
-        <p>upload your pics here and get an awesome mosaic from <a href="http://500px.com">500px</a> pictures!</p>
-        <p>
-            <form action="/detail">
-                <div>
-                    <input type="file" name="picture">
-                    <input type="submit" class="btn primary" value="beam me up scotty!">
-                    <input type="reset" class="btn" value="naah, don't do nothing!">
-                </div>
-            </form>
-        </p>
+        <h1>pictur.me</h1>
+        <p>upload your picture and get an awesome mosaic from <a href="http://500px.com">500px</a> images</p>
+        <form action="/detail">
+            <div>
+                <input type="file" name="picture" value="go">
+            </div>
+            <br />
+            <div>
+                <input type="submit" class="btn primary" value="beam me up scotty!">
+                <input type="reset" class="btn" value="naah, don't do nothing!">
+            </div>
+        </form>
 {% endblock content %}
