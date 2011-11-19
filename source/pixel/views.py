@@ -15,7 +15,7 @@ from StringIO import StringIO
 import urllib,hashlib
 from PIL import Image
 
-from pixel.image2 import main
+from pixel.image2 import ImageTrans
 
 from pixel.models import UserImage
 
@@ -27,7 +27,8 @@ def upload(request):
     if ff:
         imgFile = Image.open(StringIO(ff.read()))
         
-        mosaic = main(imgFile,2)
+        ap = ImageTrans()
+        mosaic = ap.main(imgFile,2)
         
         photo = UserImage()
         fn_image = hashlib.md5(mosaic.getvalue()).hexdigest()+'.jpg'

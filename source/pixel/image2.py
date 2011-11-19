@@ -250,5 +250,6 @@ def output_image(image, filename):
     except IOError:
         print 'Cannot save image ', filename
 
-def main(img,ratio):
-    create_mosaic(img, 'test.jpg', ratio)
+class ImageTrans():
+    def main(self, img,ratio):
+        create_mosaic(img, 'test.jpg', ratio)
