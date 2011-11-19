@@ -30,7 +30,7 @@ def upload(request):
         ap = ImageTrans()
         
         imgFile.thumbnail((500,500))
-        mosaic = ap.main(imgFile,8)
+        mosaic = ap.main(imgFile,4)
         
         photo = UserImage()
         sio = StringIO()
