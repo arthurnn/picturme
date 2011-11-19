@@ -28,7 +28,9 @@ def upload(request):
         imgFile = Image.open(StringIO(ff.read()))
         
         ap = ImageTrans()
-        mosaic = ap.main(imgFile,2)
+        
+        imgFile.thumbnail((500,500))
+        mosaic = ap.main(imgFile,10)
         
         photo = UserImage()
         sio = StringIO()
