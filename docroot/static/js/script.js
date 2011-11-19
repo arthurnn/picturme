@@ -24,8 +24,23 @@ $(function(){
     popup(url, title)
     return false;
   });
+  $("form").bind("reset", function(){
+      //return confirm("Are you sure?");
+  });
+  $("#loader").ready(function(){
+      var $t = $("#loader");
+
+      setInterval(function(){
+        if ($t.text().length >= 3) {
+            $t.text(".");
+        }
+        else {     
+            $t.append(".");   
+        }
+    }, 1000);
+  });
 });
 
 var popup = function(url, title) {
     return window.open(url, title, "height=250,width=550");
-}
+};

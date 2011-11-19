@@ -8,14 +8,25 @@
 {% block content %}
     <section>
         <div class="show-grid row">
+            <div class="span">
+                <p>That's the resulting mosaic. Do you like it?</p>
+                <details open>
+                    <summary>Yes!</summary>
+                    <p>Share it with thie url: <input type="text" value="URL" /> or directly share to: <a href="https://twitter.com/share" class="share-tw" title="Twitter">Twitter</a> and <a href="#" class="share-fb">Facebook</a></p>
+                </details>
+                <details>
+                    <summary>No!</summary>
+                    <p>Well that's sad but why don't you give it another try... <a href="#">retry</a></p>
+                </details>
+            </div>
+        </div>
+        <br />
+        <div class="show-grid row">
             <!-- LEFT SIDE -->
             <div class="span9">
                 <div id="picture">
                     <img src="{{ image.url }}" alt="" />
                 </div>
-                <p>
-                    Share to: <a href="https://twitter.com/share" class="share-tw" title="Twitter">Twitter</a> | <a href="#" class="share-fb">Facebook</a>
-                </p>
             </div>
             <!-- RIGHT SIDE -->
             <div class="span5 sidebar">
@@ -24,17 +35,17 @@
                     <ul class="media-grid">
                         <li>
                             <a href="#">
-                                <img class="thumbnail" src="http://placehold.it/100x100" alt="">
+                                <img class="thumbnail" src="http://placehold.it/100" alt="">
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <img class="thumbnail" src="http://placehold.it/100x100" alt="">
+                                <img class="thumbnail" src="http://placehold.it/100" alt="">
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <img class="thumbnail" src="http://placehold.it/100x100" alt="">
+                                <img class="thumbnail" src="http://placehold.it/100" alt="">
                             </a>
                         </li>
                     </ul>
