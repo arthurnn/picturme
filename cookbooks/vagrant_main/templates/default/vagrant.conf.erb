@@ -1,0 +1,30 @@
+<VirtualHost *:80>
+    ServerName <%= node[:project_name] %>
+    ServerAdmin <%= node[:apache][:contact] %>
+    ServerAlias 0.0.0.0
+    
+    LogLevel warn
+    ErrorLog <%= node[:apache][:log_dir] %>/<%= node[:project_name] %>_error.log 
+	CustomLog <%= node[:apache][:log_dir] %>/<%= node[:project_name] %>_access.log combined
+
+    WSGIDaemonProcess <%= node[:project_name] %> user=www-data group=www-data maximum-requests=10000 python-path=/home/vagrant/env/lib/python2.6/site-packages
+    WSGIProcessGroup <%= node[:project_name] %>
+
+    WSGIScriptAlias / <%= node[:home_folder] %>/../deploy/django.wsgi
+
+
+    <Directory <%= node[:home_folder] %>/../deploy>
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+	Alias /media/ /var/www/<%= node[:project_name] %>/media/
+	Alias /static/ /var/www/<%= node[:project_name] %>/static/
+	
+	<Directory /var/www/<%= node[:project_name] %>/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	
+</VirtualHost>
+
