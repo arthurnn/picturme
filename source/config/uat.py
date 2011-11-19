@@ -33,8 +33,8 @@ DATABASES = {
 AWS_ACCESS_KEY_ID = 'AKIAIC6VFIJCTGUNGU4A'
 AWS_SECRET_ACCESS_KEY = '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'
 
-AWS_STORAGE_BUCKET_NAME = 'pictureme_bucket'
-AWS_S3_CUSTOM_DOMAIN = 's3.amazonaws.com/pictureme_bucket'
+AWS_STORAGE_BUCKET_NAME = 'picturme_bucket'
+AWS_S3_CUSTOM_DOMAIN = 's3.amazonaws.com/picturme_bucket'
 #AWS_S3_CUSTOM_DOMAIN = 'd2579uvf4z4cis.cloudfront.net'
 #AWS_CF_DISTRIBUTION_ID = 'E209JJ6DBAW14K'
 
@@ -43,7 +43,7 @@ AWS_S3_CUSTOM_DOMAIN = 's3.amazonaws.com/pictureme_bucket'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-STATIC_URL = 'http://%s/static/' % 's3.amazonaws.com/pictureme_bucket'
+STATIC_URL = 'http://%s/static/' % 's3.amazonaws.com/picturme_bucket'
 
 ADMIN_MEDIA_PREFIX = 'http://%s/admin/' % AWS_S3_CUSTOM_DOMAIN
 
@@ -51,10 +51,6 @@ STATICFILES_DIRS = (
     ("static", "/home/ubuntu/projects/picturme/docroot/static"),
 )
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
