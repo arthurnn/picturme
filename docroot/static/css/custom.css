@@ -1,8 +1,17 @@
+@font-face {
+    font-family: 'Didact Gothic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Didact Gothic'), local('DidactGothic'), url('http://themes.googleusercontent.com/static/fonts/didactgothic/v3/v8_72sD3DYMKyM0dn3LtWk3vq9dAc3DuCNWjMJNKvGE.woff') format('woff');
+}
+* {
+    text-transform: lowercase;
+}
 header {
     margin: 20px 0 0;
 }
 header h1 {
-    font-family: 'Abel', sans-serif;
+    font-family: 'Didact Gothic', sans-serif;
 }
 header h1 a{
     color: #000;
