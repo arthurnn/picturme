@@ -1,0 +1,12 @@
+header {
+    margin: 20px 0 0;
+}
+header h1 {
+    font-family: 'Abel', sans-serif;
+}
+header h1 a{
+    color: #000;
+}
+#metadata-container {    
+    height: 460px;
+}
