@@ -16,7 +16,7 @@ DATABASES = {
         'NAME': 'picturme',                      # Or path to database file if using sqlite3.
         'USER': 'django',                      # Not used with sqlite3.
         'PASSWORD': 'n2EdygGba',                  # Not used with sqlite3.
-        'HOST': '107.22.190.247',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '107.22.191.0',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
