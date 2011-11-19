@@ -1,0 +1,13 @@
+@media screen and (max-width: 940px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    /* disable webkit text size adjust (for iPhone) */
+    html {
+        -webkit-text-size-adjust: none;
+    }
+}

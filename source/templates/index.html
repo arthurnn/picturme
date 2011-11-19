@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block additional_headers %}
+    <title>pictur.me | home</title>
+{% endblock additional_headers %}
+
 {% block content %}
-        <p>Pancetta kielbasa fatback jowl strip steak corned beef tail ribeye pastrami, bacon pork sirloin turkey. Pork chop jowl beef pancetta, meatloaf venison meatball spare ribs turkey ham. Tri-tip flank short ribs, shoulder filet mignon ham pig. Short loin ball tip jerky shoulder. Tail frankfurter short ribs, pork loin kielbasa jerky salami tri-tip prosciutto. Tongue pig leberkäse flank drumstick. Cow turkey sirloin ribeye drumstick.</p>
+        <h1>picture.me</h1>
+        <p>upload your pics here and get an awesome mosaic from <a href="http://500px.com">500px</a> pictures!</p>
         <p>
             <form action="/detail">
                 <div>
                     <input type="file" name="picture">
-                    <input type="submit" class="btn primary" value="Beam me up Scotty!">
-                    <input type="reset" class="btn" value="Naah, don't do nothing!">
+                    <input type="submit" class="btn primary" value="beam me up scotty!">
+                    <input type="reset" class="btn" value="naah, don't do nothing!">
                 </div>
             </form>
         </p>
