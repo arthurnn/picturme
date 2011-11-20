@@ -7,6 +7,7 @@ import os, sys
 import Image
 import time
 import osaic
+import random
 from math import sqrt
 from PIL import Image
 from pixel.models import Pixel
@@ -41,13 +42,13 @@ def top_down(grid, output, tile_size):
     #cursor = Pixel.objects.all()
     
     size = 200
-    mm = Pixel.objects.count()-size
+    mm = Pixel.objects.count()-size-1
     if max > 10:
         index = random.randint(0,mm)
     else:
         index = 0
     
-    cursor = Pixel.objects.all()[index:size]
+    cursor = Pixel.objects.all()[index:index+size]
     
     image_list = ImageList(gen(cursor))
     users = []
@@ -83,7 +84,6 @@ def top_down(grid, output, tile_size):
             #print counter
     return _tile_list;
 
-import random
 def gen(cursor):
     for photo in cursor:
         yield photo
