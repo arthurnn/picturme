@@ -10,7 +10,7 @@ from django.db.models import Count
 from django.core.files.base import ContentFile
 
 from StringIO import StringIO
-import urllib,hashlib
+import urllib,hashlib,osaic
 from PIL import Image
 
 from fivehundred import FiveHundredPx
@@ -81,6 +81,10 @@ class Command(BaseCommand):
             
             arr = self.subdivide(img)
             #arr.append(img)
+            
+#            w = osaic.ImageWrapper(filename=img.filename, blob=img)
+#            main_rgb = osaic.average_color(w)
+#            osaic.quantize_color(main_rgb, levels=2)
             
             photo = Photo()
             

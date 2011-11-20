@@ -12,9 +12,10 @@ Created on Nov 19, 2011
 import os, sys
 import Image
 import time
+import osaic
 from math import sqrt
 from PIL import Image
-from pixel.models import Pixel
+from pixel.models import Pixel,Photo
 from StringIO import StringIO
 
 def create_mosaic(source_image, output, ratio):
@@ -30,17 +31,20 @@ def create_mosaic(source_image, output, ratio):
         threshold = threshold to use for acceptable difference between colors
         '''
         size_ratio = ratio
-        tile_size = (100,100)
+        tile_size = (50,50)
         #subdivide source image into tiles 
-        subdivision_size = (tile_size[0] / size_ratio, tile_size[1] / size_ratio)
+        #subdivision_size = (tile_size[0] / size_ratio, tile_size[1] / size_ratio)
         
-        source_grid = subdivide_source(source_image, subdivision_size)
+        #source_grid = subdivide_source(source_image, subdivision_size)
+        w = osaic.ImageWrapper(filename=source_image.filename, blob=source_image)
+        source_grid = osaic.tilefy(w,100)
+        
         output_size = (len(source_grid[0]) * tile_size[0],
                        len(source_grid) * tile_size[1]) 
         mosaic = Image.new('RGB', output_size)
         
-        #width = source_image.size[0] / (tile_size[0] / size_ratio)
-        #height = source_image.size[1] / (tile_size[1] / size_ratio)
+        width = source_image.size[0] / (tile_size[0] / size_ratio)
+        height = source_image.size[1] / (tile_size[1] / size_ratio)
         #print '%d x %d = %d' % (width, height, width * height)
 
         #Loop through tile_grid, then compare each tile from source_image with every 
@@ -61,19 +65,39 @@ def top_down(grid, output, tile_size):
     Starts matching from top-left, going to bottom-right
     '''
     
-    cursor = Pixel.objects.all()
+    #cursor = Pixel.objects.all()
+    image_list = ImageList(gen())
     
     counter = 0
     for yPos, y in enumerate(grid):
         for xPos, x in enumerate(grid[yPos]):
             #print counter, 
-            tile = find_closest_match(grid[yPos][xPos],cursor)
+            #tile = find_closest_match(grid[yPos][xPos],cursor)
+            
+            #rgb = average_color(grid[yPos][xPos])
+            rgb = grid[yPos][xPos].color
+            tile = image_list.search(rgb).image.blob
+            
              
             xy = (xPos * tile_size[0], yPos * tile_size[1])
             #print tile
             output.paste(tile, xy)
             counter += 1
+            #print counter
 
+
+def gen():
+    #cursor = Pixel.objects.all()
+    cursor = Photo.objects.all()
+    
+    for photo in cursor:
+        #print pixel.photo.image1.name
+        #yield pixel.photo.image1.name
+        
+        tile = Image.open(StringIO(photo.image1.file.read())) 
+        yield tile
+        #tile.close()
+        
 
 
 def find_closest_match(image,cursor):
@@ -215,25 +239,49 @@ def subdivide_tile(image):
             subdivisions.append(cropped)
     return subdivisions
 
-def average_rgb(image):
-    '''
-    Calculates the average RGB of an image.
-    Returns 3-tuple (R, G, B)
-    '''
-    average_red = 0
-    average_green = 0
-    average_blue = 0
-    maxcolors = image.size[0]*image.size[1]
-    colors = image.getcolors(maxcolors)
-    for color in colors:
-        average_red += color[1][0] * color[0]
-        average_green += color[1][1] * color[0]
-        average_blue += color[1][2] * color[0]
-    average_red /= maxcolors
-    average_green /= maxcolors
-    average_blue /= maxcolors
-    return (average_red, average_green, average_blue)
+#def average_rgb(image):
+#    '''
+#    Calculates the average RGB of an image.
+#    Returns 3-tuple (R, G, B)
+#    '''
+#    average_red = 0
+#    average_green = 0
+#    average_blue = 0
+#    maxcolors = image.size[0]*image.size[1]
+#    colors = image.getcolors(maxcolors)
+#    for color in colors:
+#        average_red += color[1][0] * color[0]
+#        average_green += color[1][1] * color[0]
+#        average_blue += color[1][2] * color[0]
+#    average_red /= maxcolors
+#    average_green /= maxcolors
+#    average_blue /= maxcolors
+#    return (average_red, average_green, average_blue)
 
+def average_color(img):
+    """Return the average color of the given image.
+    
+    The calculus of the average color has been implemented by looking at
+    each pixel of the image and accumulate each rgb component inside
+    separate counters.
+    
+    """
+    (width, height) = img.size
+    (n, r, g, b) = (0, 0, 0, 0)
+    maxcolors = width*height
+    colors = img.getcolors(maxcolors)
+    
+    for (many, color) in colors:
+        try:
+            (cr,cg,cb) = (color[0],color[1],color[2])
+        except TypeError:
+            (cr,cg,cb) = (color,color,color)        
+
+        n += many
+        r += many * cr
+        g += many * cg
+        b += many * cb
+    return (r // n, g // n, b // n)
 
 def output_grid(grid, size, tile_size):
     output = Image.new('RGB', size)
@@ -253,3 +301,19 @@ def output_image(image, filename):
 class ImageTrans():
     def main(self, img,ratio):
         return create_mosaic(img, 'test.jpg', ratio)
+    
+    
+class ImageList(osaic.ImageList):
+
+    def __init__(self, iterable=None):
+        self._img_list = dict()
+
+        for pil_img in iterable:
+            pil_img.convert('RGB')
+            
+            img = osaic.ImageWrapper(filename=pil_img.filename,blob=pil_img)
+
+            #color = osaic.average_color(img)
+            color = average_color(pil_img)
+
+            self._insert(osaic.ImageTuple(pil_img.filename, color, img))
