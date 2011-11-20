@@ -39,7 +39,17 @@ def top_down(grid, output, tile_size):
     #user_image = UserImage()
     
     #cursor = Pixel.objects.all()
-    image_list = ImageList(gen())
+    
+    size = 200
+    mm = Pixel.objects.count()-size
+    if max > 10:
+        index = random.randint(0,mm)
+    else:
+        index = 0
+    
+    cursor = Pixel.objects.all()[index:size]
+    
+    image_list = ImageList(gen(cursor))
     users = []
     
     
@@ -74,17 +84,7 @@ def top_down(grid, output, tile_size):
     return _tile_list;
 
 import random
-def gen():
-    
-    size = 200
-    mm = Pixel.objects.count()-size
-    if max > 10:
-        index = random.randint(0,mm)
-    else:
-        index = 0
-    
-    cursor = Pixel.objects.all()[index:size]
-    
+def gen(cursor):
     for photo in cursor:
         yield photo
         #tile = Image.open(StringIO(photo.image1.file.read())) 
