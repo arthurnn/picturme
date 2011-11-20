@@ -60,13 +60,15 @@ $(function(){
   
   $(".zoom").anythingZoomer();
   
-  $("#thumbs_list").load('/detail/thumbs/3',makePag);
+  var id = $("#picture").data('picture-id');
+  $("#thumbs_list").load('/detail/thumbs/'+id,makePag);
 
 });
 
 var makePag = function(){
+	var id = $("#picture").data('picture-id');
 	$('.pagination a').bind('click',function(){
-		$("#thumbs_list").load('/detail/thumbs/3?page='+$(this).data('page'),makePag);
+		$("#thumbs_list").load('/detail/thumbs/'+id+'?page='+$(this).data('page'),makePag);
 	})
 }
 
