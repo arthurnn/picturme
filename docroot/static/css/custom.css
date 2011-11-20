@@ -49,3 +49,8 @@ footer {
 .home-grid .thumbnail {
 	height: 100px;
 }
+.alert-message p {
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 15px;
+}
