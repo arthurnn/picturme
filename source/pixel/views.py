@@ -24,7 +24,7 @@ import hashlib, short_url
 
 @render_to('index.html')
 def home(request):
-    ids = [1,4,8,15,19]
+    ids = [1,4,30,15,19]
     ii = UserImage.objects.filter(id__in=ids)
     return {'images':ii}
     
