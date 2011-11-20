@@ -62,7 +62,9 @@ $(function(){
   	
   })
   
-  $(".zoom").anythingZoomer();
+  $(".zoom").anythingZoomer({
+    switchEvent: false
+  });
   
   var id = $("#picture").data('picture-id');
   $("#thumbs_list").load('/detail/thumbs/'+id,makePag);
