@@ -7,7 +7,7 @@ from os.path import abspath, dirname, join
 
 PROJECT_ROOT = abspath(join(dirname(__file__), "../"))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
