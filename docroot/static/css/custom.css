@@ -18,6 +18,16 @@ footer {
 .hero-unit h1{
     margin: 0 0 18px;
 }
-.zoom      { width: 500px; }
-.small img { width: 500px; }
-.large img { width: auto; background: white; }
+.zoom {
+    width: 500px;
+}
+.small img {
+    width: 500px;
+}
+.large img {
+    width: auto;
+    background: white; 
+}
+#metadata-container {
+    padding-bottom: 0;
+}
