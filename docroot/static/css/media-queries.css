@@ -2,6 +2,9 @@
     .container {
         width: 95%;
     }
+    .hero-unit {
+        padding: 5%;
+    }
 }
 
 @media screen and (max-width: 480px) {
