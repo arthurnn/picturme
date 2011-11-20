@@ -18,19 +18,7 @@ from PIL import Image
 from pixel.models import Pixel,Photo
 from StringIO import StringIO
 
-def create_mosaic(source_image, output, ratio):
-        '''
-        source = source image; must be 4:3 or 3:4 ratio
-        output = output filename
-        image_pool_dir = directory of the tile image pool; 
-                            must have imagepool.db inside
-        ratio = ratio between output and source;
-                e.g. ratio of 2 means output will be 2 times bigger than source
-                the higher the ratio, the more detailed the output
-        repeat = if tiles can be repeated or not
-        threshold = threshold to use for acceptable difference between colors
-        '''
-        size_ratio = ratio
+def create_mosaic(source_image):
         tile_size = (50,50)
         #subdivide source image into tiles 
         #subdivision_size = (tile_size[0] / size_ratio, tile_size[1] / size_ratio)
@@ -47,20 +35,7 @@ def create_mosaic(source_image, output, ratio):
                        len(source_grid) * tile_size[1]) 
         mosaic = Image.new('RGB', output_size)
         
-        width = source_image.size[0] / (tile_size[0] / size_ratio)
-        height = source_image.size[1] / (tile_size[1] / size_ratio)
-        #print '%d x %d = %d' % (width, height, width * height)
-
-        #Loop through tile_grid, then compare each tile from source_image with every 
-        #tile in imagepool. Find the closest match, then place that tile in place.
-        #try:
         top_down(source_grid, mosaic, tile_size)
-        #except KeyboardInterrupt:
-            #print 'Cancelled by user. '
-            #return
-        #else:
-            #output_image(mosaic, output)
-            #print 'Success! Generated %s' % (output)
             
         return mosaic
 
@@ -89,20 +64,13 @@ def top_down(grid, output, tile_size):
             counter += 1
             #print counter
 
-
 def gen():
-    #cursor = Pixel.objects.all()
     cursor = Photo.objects.all()[:200]
     
     for photo in cursor:
-        #print pixel.photo.image1.name
-        #yield pixel.photo.image1.name
-        
         tile = Image.open(StringIO(photo.image1.file.read())) 
         yield tile
-        #tile.close()
         
-
 
 def find_closest_match(image,cursor):
     '''
@@ -316,7 +284,7 @@ def output_image(image, filename):
 
 class ImageTrans():
     def main(self, img,ratio):
-        return create_mosaic(img, 'test.jpg', ratio)
+        return create_mosaic(img)
     
     
 class ImageList(osaic.ImageList):
@@ -333,3 +301,30 @@ class ImageList(osaic.ImageList):
             color = average_color(pil_img)
 
             self._insert(osaic.ImageTuple(pil_img.filename, color, img))
+            
+    def search(self, color):
+        """Search the most similar image in terms of average color."""
+        # first find the group of images having the same quantized
+        # average color.
+        qcolor = osaic.quantize_color(color)
+        best_img_list = None
+        best_dist = None
+        for (img_list_color, img_list) in self._img_list.iteritems():
+            dist = osaic.squaredistance(qcolor, img_list_color)
+            if dist==0:
+                best_img_list = img_list
+                break
+            if best_dist is None or dist < best_dist:
+                best_dist = dist
+                best_img_list = img_list
+        # now spot which of the images in the list is equal to the
+        # target one.
+        best_img = None
+        best_dist = None
+        for img_wrapper in best_img_list:
+            dist = osaic.squaredistance(color, img_wrapper.color)
+            if best_dist is None or dist < best_dist:
+                best_dist = dist
+                best_img = img_wrapper
+        # finally return the best match.
+        return best_img
