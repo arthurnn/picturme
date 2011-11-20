@@ -88,7 +88,7 @@ def top_down(grid, output, tile_size):
 
 def gen():
     #cursor = Pixel.objects.all()
-    cursor = Photo.objects.all()[:100]
+    cursor = Photo.objects.all()[:500]
     
     for photo in cursor:
         #print pixel.photo.image1.name
