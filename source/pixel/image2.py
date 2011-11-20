@@ -73,8 +73,17 @@ def top_down(grid, output, tile_size):
             #print counter
     return _tile_list;
 
+import random
 def gen():
-    cursor = Pixel.objects.all()[:200]
+    
+    size = 200
+    mm = Pixel.objects.count()-size
+    if max > 10:
+        index = random.randint(0,mm)
+    else:
+        index = 0
+    
+    cursor = Pixel.objects.all()[index:size]
     
     for photo in cursor:
         yield photo
