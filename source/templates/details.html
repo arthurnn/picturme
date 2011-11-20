@@ -27,7 +27,12 @@
             <!-- LEFT SIDE -->
             <div class="span9">
                 <div id="picture" class="zoom" width="500">
-                    <img id="zoom" src="{{ image.url }}" alt="" style="width: 500px" />
+                    <div class="small">
+                        <img id="zoom" src="{{ pixel.thumbnail.url }}" alt="" />
+                    </div>
+                    <div class="large">
+                        <img id="zoom" src="{{ pixel.image.url }}" alt="" />
+                    </div>
                 </div>
             </div>
             <!-- RIGHT SIDE -->

@@ -1,4 +1,7 @@
 @media screen and (max-width: 940px) {
+    img {
+        width: 95%;
+    }
     .container {
         width: 95%;
     }

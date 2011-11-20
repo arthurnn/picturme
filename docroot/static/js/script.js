@@ -58,8 +58,7 @@ $(function(){
   	
   })
   
-  
-  //$(".zoom").anythingZoomer();
+  $(".zoom").anythingZoomer();
 
 });
 
