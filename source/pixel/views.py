@@ -17,7 +17,7 @@ from PIL import Image
 
 from pixel.image2 import ImageTrans
 
-from pixel.models import UserImage
+from pixel.models import UserImage,UserTiles
 
 import hashlib
 
@@ -50,9 +50,16 @@ def upload(request):
         
         photo.save()
         
-        for a in arr:
-            a.user_image=photo
-            a.save()
+        
+        for (pixel_id, xy_list) in arr.iteritems():
+            tt = UserTiles(user_image=photo)
+            tt.pixel_id = pixel_id
+            tt.save()
+            
+        
+#        for a in arr:
+#            a.user_image=photo
+#            a.save()
         
     return redirect('/detail/%s'%photo.id)
 

@@ -26,5 +26,5 @@ class UserTiles(models.Model):
     user_image = models.ForeignKey(UserImage)
     pixel = models.ForeignKey(Pixel)
     
-    x = models.PositiveIntegerField()
-    y = models.PositiveIntegerField()
+    #x = models.PositiveIntegerField()
+    #y = models.PositiveIntegerField()
