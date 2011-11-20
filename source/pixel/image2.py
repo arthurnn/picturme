@@ -53,11 +53,8 @@ def top_down(grid, output, tile_size):
     cursor = Pixel.objects.all()[index:index+size]
     
     image_list = ImageList(gen(cursor))
-    users = []
-    
     
     _tile_list = dict()
-    
     
     counter = 0
     for yPos, y in enumerate(grid):
@@ -76,11 +73,8 @@ def top_down(grid, output, tile_size):
             output.paste(tile, xy)
             counter += 1
             
-            #users.append(UserTiles(x=xy[0],y=xy[1],pixel=tile_pixel))
-            
             _tile_list.setdefault((tile_pixel.id), list()).append((xy[0],xy[1]))
             
-            #tile.close()
             #print counter
     return _tile_list;
 

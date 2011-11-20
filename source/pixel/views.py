@@ -22,6 +22,13 @@ from pixel.models import UserImage,UserTiles
 
 import hashlib
 
+@render_to('index.html')
+def home(request):
+    ids = [1,4,8,15,19]
+    ii = UserImage.objects.filter(id__in=ids)
+    return {'images':ii}
+    
+
 def upload(request):
     
     ff = request.FILES.get('file',False)

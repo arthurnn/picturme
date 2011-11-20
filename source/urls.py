@@ -4,7 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', direct_to_template, {'template': 'index.html'}, name='home'),
+    url(r'^$', 'pixel.views.home', name='home'),
     
     url(r'^upload/$', 'pixel.views.upload',  name='upload'),
     

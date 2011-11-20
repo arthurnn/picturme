@@ -21,31 +21,14 @@
         </form>
         <br />
         <ul class="media-grid">
+        	
+        	{% for pixel in images %}
             <li>
-                <a href="http://pictur.me/detail/1">
-                    <img class="thumbnail" src="http://placehold.it/100" alt="">
+                <a href="/detail/{{ pixel.id }}">
+                    <img class="thumbnail" src="{{ pixel.thumbnail.url }}" alt="">
                 </a>
             </li>
-            <li>
-                <a href="http://pictur.me/detail/4">
-                    <img class="thumbnail" src="http://placehold.it/100" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="http://pictur.me/detail/8">
-                    <img class="thumbnail" src="http://placehold.it/100" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="http://pictur.me/detail/15">
-                    <img class="thumbnail" src="http://placehold.it/100" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="http://pictur.me/detail/19">
-                    <img class="thumbnail" src="http://placehold.it/100" alt="">
-                </a>
-            </li>
+            {% endfor %}
         </ul>
    </div>     
         
