@@ -60,10 +60,15 @@ $(function(){
   
   $(".zoom").anythingZoomer();
   
-  
-  $("#thumbs_list").load('/detail/thumbs/3');
+  $("#thumbs_list").load('/detail/thumbs/3',makePag);
 
 });
+
+var makePag = function(){
+	$('.pagination a').bind('click',function(){
+		$("#thumbs_list").load('/detail/thumbs/3?page='+$(this).data('page'),makePag);
+	})
+}
 
 var popup = function(url, title) {
     return window.open(url, title, "height=250,width=550");
