@@ -42,11 +42,15 @@ $(function(){
   $("#detail-url").ready(function(){
     $("#detail-url").val(location.href);
   });
+
+  $(".close").click(function(){
+    $(this).parent().hide();
+  });
   
   
   $("#uploadform").submit(function(){
     if(!$("input[type=file]").val()){
-      alert("Please select an image to upload!");
+      $(".error").fadeIn();
       return false;
     }
   	var $form = $(this);
