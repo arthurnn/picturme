@@ -73,5 +73,5 @@ var makePag = function(){
 }
 
 var popup = function(url, title) {
-    return window.open(url, title, "height=250,width=550");
+    return window.open(url, title, "height=300,width=550");
 };
