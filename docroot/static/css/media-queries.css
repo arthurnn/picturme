@@ -1,6 +1,7 @@
 @media screen and (max-width: 940px) {
     img {
-        width: 95%;
+        height: auto !important;
+        width: 95% !important;
     }
     .container {
         width: 95%;
