@@ -29,8 +29,8 @@ def upload(request):
         
         ap = ImageTrans()
         
-        imgFile.thumbnail((500,500))
-        mosaic = ap.main(imgFile,4)
+        #imgFile.thumbnail((500,500))
+        (mosaic,arr) = ap.main(imgFile)
         
         photo = UserImage()
         sio = StringIO()
@@ -38,7 +38,21 @@ def upload(request):
         
         fn_image = hashlib.md5(sio.getvalue()).hexdigest()+'.jpg'
         photo.image.save(fn_image, ContentFile(sio.getvalue()), save=False)
+        
+        
+        m_copy = mosaic.copy()
+        m_copy.thumbnail((500,500))
+        sio = StringIO()
+        m_copy.save(sio,'JPEG')
+        
+        fn_image = hashlib.md5(sio.getvalue()).hexdigest()+'.jpg'
+        photo.thumbnail.save(fn_image, ContentFile(sio.getvalue()), save=False)
+        
         photo.save()
+        
+        for a in arr:
+            a.user_image=photo
+            a.save()
         
     return redirect('/detail/%s'%photo.id)
 
