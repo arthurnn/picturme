@@ -65,7 +65,7 @@ def top_down(grid, output, tile_size):
             #print counter
 
 def gen():
-    cursor = Photo.objects.all()[:200]
+    cursor = Photo.objects.all()[:300]
     
     for photo in cursor:
         tile = Image.open(StringIO(photo.image1.file.read())) 
