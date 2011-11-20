@@ -46,6 +46,6 @@ footer {
     width: 500px;
 }
 
-.thumbnail {
-	width: 100px;
+.home-grid .thumbnail {
+	height: 100px;
 }
