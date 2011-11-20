@@ -39,6 +39,9 @@ $(function(){
         }
     }, 1000);
   });
+  $("#detail-url").ready(function(){
+    $("#detail-url").val(location.href);
+  });
 });
 
 var popup = function(url, title) {
