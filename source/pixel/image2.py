@@ -14,6 +14,8 @@ from pixel.models import Pixel
 from StringIO import StringIO
 from collections import namedtuple
 from pixel.models import UserTiles
+from django.core.cache import cache
+
 
 def create_mosaic(source_image):
         tile_size = (50,50)
@@ -183,12 +185,11 @@ class ImageList(osaic.ImageList):
     def search(self, color):
         qcolor = osaic.quantize_color(color)
         
-        pixel = Pixel.objects.filter(qr=qcolor[0],qg=qcolor[1],qb=qcolor[2])[:1]
-        if pixel.count() > 0:
-            pixel = pixel[0]
+        pixel_id = cache.get('%d%d%d' % qcolor)
+        if pixel_id is not None:
+            pixel = Pixel.objects.get(pk=pixel_id)
             image = Image.open(StringIO(pixel.image1.file.read())) 
             return ImageTuple(color, pixel, image)
-        
         
         best_img_list = None
         best_dist = None
@@ -210,5 +211,7 @@ class ImageList(osaic.ImageList):
                 best_dist = dist
                 best_img = img_wrapper
         
+        
+        cache.set('%d%d%d' % qcolor, best_img.pixel.id)
         # finally return the best match.
         return best_img
