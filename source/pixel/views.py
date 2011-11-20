@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 from annoying.decorators import render_to
 from django.core.files.base import ContentFile
 from django.shortcuts import render_to_response, get_object_or_404, redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from StringIO import StringIO
 import urllib,hashlib
@@ -65,8 +66,26 @@ def upload(request):
 
 
 @render_to('details.html')
-def detail(request, id):
-    u = get_object_or_404(UserImage,pk=id)
-    return {'image':u.image}
+def detail(request, image_id):
+    u = get_object_or_404(UserImage,pk=image_id)
+    return {'pixel':u}
+    
+
+@render_to('details_thumbnails.html')
+def thumbList(request, image_id):
+    u = get_object_or_404(UserImage, pk=image_id)
+    q = u.usertiles_set.all()
     
     
+    paginator = Paginator(q, 16) # Show 13 per page
+    try:
+        list_pag = paginator.page(request.GET.get('page', 1))
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        list_pag = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        list_pag = paginator.page(paginator.num_pages)      
+        
+    return {'pag':list_pag}
+
