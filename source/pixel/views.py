@@ -78,7 +78,11 @@ def upload(request):
 @render_to('details.html')
 def detail(request, image_id):
     u = get_object_or_404(UserImage,pk=image_id)
-    return {'pixel':u}
+    
+    url = short_url.encode_url(u.id)
+    ss = request.build_absolute_uri('/d/%s'%url)
+    
+    return {'pixel':u,'short_url':ss}
     
 
 @render_to('details.html')
@@ -87,7 +91,9 @@ def short(request,short_id):
     key = short_url.decode_url(short_id) 
     u = get_object_or_404(UserImage,pk=long(key))
     
-    return {'pixel':u}
+    ss = request.build_absolute_uri('/d/%s'%short_id)
+    
+    return {'pixel':u,'short_url':ss}
 
    
 @render_to('details_thumbnails.html')

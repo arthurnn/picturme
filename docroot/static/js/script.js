@@ -6,7 +6,7 @@ $(function(){
     var $t = $(this),
         url = $t.attr("href"),
         title = $t.attr("title");
-    url += "?text=" + escape("I just uploaded a picture to #picturme "+ location.href);
+    url += "?text=" + escape("I just uploaded a picture to #picturme "+ $("#detail-url").val());
     popup(url, title)
     return false;
   });
@@ -14,7 +14,7 @@ $(function(){
     var $t = $(this),
         url = "http://www.facebook.com/sharer.php",
         title = $t.attr("title"),
-        href = location.href.indexOf("localhost")!=-1 ? "http://www.pictur.me" : location.href;
+        href = location.href.indexOf("localhost")!=-1 ? "http://www.pictur.me" : $("#detail-url").val();
     
     url += "?u=" + href;
     url += "&t=" + escape( "I just uploaded an image on picture.me");
@@ -38,9 +38,6 @@ $(function(){
             $t.append(".");   
         }
     }, 1000);
-  });
-  $("#detail-url").ready(function(){
-    $("#detail-url").val(location.href);
   });
 
   $(".close").click(function(){
