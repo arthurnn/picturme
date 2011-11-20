@@ -185,11 +185,11 @@ class ImageList(osaic.ImageList):
     def search(self, color):
         qcolor = osaic.quantize_color(color)
         
-        pixel_id = cache.get('%d%d%d' % qcolor)
-        if pixel_id is not None:
-            pixel = Pixel.objects.get(pk=pixel_id)
-            image = Image.open(StringIO(pixel.image1.file.read())) 
-            return ImageTuple(color, pixel, image)
+#        pixel_id = cache.get('%d%d%d' % qcolor)
+#        if pixel_id is not None:
+#            pixel = Pixel.objects.get(pk=pixel_id)
+#            image = Image.open(StringIO(pixel.image1.file.read())) 
+#            return ImageTuple(color, pixel, image)
         
         best_img_list = None
         best_dist = None
@@ -212,6 +212,6 @@ class ImageList(osaic.ImageList):
                 best_img = img_wrapper
         
         
-        cache.set('%d%d%d' % qcolor, best_img.pixel.id)
+#        cache.set('%d%d%d' % qcolor, best_img.pixel.id)
         # finally return the best match.
         return best_img
