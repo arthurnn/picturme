@@ -6,7 +6,7 @@ $(function(){
     var $t = $(this),
         url = $t.attr("href"),
         title = $t.attr("title");
-    url += "?text=I just uploaded a picture to #picturme ";// + location.href;
+    url += "?text=" + escape("I just uploaded a picture to #picturme "+ location.href);
     popup(url, title)
     return false;
   });
