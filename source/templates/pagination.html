@@ -11,7 +11,7 @@
 		
 		
 		{% if middle %}
-		    <strong>...</strong>
+		    <li><strong>...</strong></li>
 		    {% for pnum in middle %}
 		        <li><a data-page="{{ pnum }}" {% if page.number == pnum %}class="active"{% endif %} href="javascript:void(0);">{{ pnum }}</a></li>
 		    {% endfor %}
@@ -19,7 +19,7 @@
 		
 		
 		{% if end %}
-		    <strong>...</strong>
+		    <li><strong>...</strong></li>
 		    {% for pnum in end %}
 		    	<li><a data-page="{{ pnum }}" {% if page.number == pnum %}class="active"{% endif %} href="javascript:void(0);">{{ pnum }}</a></li>
 		    {% endfor %}
