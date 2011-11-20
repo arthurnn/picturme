@@ -74,7 +74,7 @@ def top_down(grid, output, tile_size):
     return _tile_list;
 
 def gen():
-    cursor = Pixel.objects.all()[:300]
+    cursor = Pixel.objects.all()[:200]
     
     for photo in cursor:
         yield photo
