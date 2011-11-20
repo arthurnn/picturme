@@ -37,7 +37,11 @@ def create_mosaic(source_image, output, ratio):
         
         #source_grid = subdivide_source(source_image, subdivision_size)
         w = osaic.ImageWrapper(filename=source_image.filename, blob=source_image)
-        source_grid = osaic.tilefy(w,100)
+        #source_grid = osaic.tilefy(w,100)
+        copy = source_image.copy()
+        copy.thumbnail((100,100))
+        
+        source_grid = tilefy(w,copy.size)
         
         output_size = (len(source_grid[0]) * tile_size[0],
                        len(source_grid) * tile_size[1]) 
@@ -88,7 +92,7 @@ def top_down(grid, output, tile_size):
 
 def gen():
     #cursor = Pixel.objects.all()
-    cursor = Photo.objects.all()[:500]
+    cursor = Photo.objects.all()[:200]
     
     for photo in cursor:
         #print pixel.photo.image1.name
@@ -238,6 +242,18 @@ def subdivide_tile(image):
             cropped = image.crop((x * w, y * h, x * w + w, y * h + h))
             subdivisions.append(cropped)
     return subdivisions
+
+def tilefy(img, tiles):
+    matrix = [[None for i in xrange(tiles[0])] for j in xrange(tiles[1])]
+    (width, height) = img.size
+    (tile_width, tile_height) = (width // tiles[0], height // tiles[1])
+    (x, y) = (0, 0)
+    for (i, y) in enumerate(xrange(0, tile_height * tiles[1], tile_height)):
+        for (j, x) in enumerate(xrange(0, tile_width * tiles[0], tile_width)):
+            rect = (x, y, x + tile_width, y + tile_height)
+            tile = img.crop(rect)
+            matrix[i][j] = osaic.ImageTuple(img.filename, osaic.average_color(tile), None)
+    return matrix
 
 #def average_rgb(image):
 #    '''
