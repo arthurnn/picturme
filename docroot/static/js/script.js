@@ -62,7 +62,6 @@ $(function(){
   
   var id = $("#picture").data('picture-id');
   $("#thumbs_list").load('/detail/thumbs/'+id,makePag);
-
 });
 
 var makePag = function(){

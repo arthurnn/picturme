@@ -28,6 +28,14 @@ footer {
     width: auto;
     background: white; 
 }
+.pagination ul{
+    width: 100%;
+}
+.pagination ul li a {
+    font-size: 13px;
+    line-height: 20px;
+    padding: 0 4px;
+}
 #metadata-container {
     padding-bottom: 0;
 }

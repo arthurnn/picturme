@@ -32,11 +32,14 @@
             <div class="span9">
                 <div id="picture" class="zoom" data-picture-id="{{pixel.id}}">
                     <div class="small">
-                        <img id="zoom" src="{{ pixel.thumbnail.url }}" alt="" />
+                        <img id="zoom" src="{{ pixel.thumbnail.url }}" alt="" style="height:{{ pixel.thumbnail.height }}px;width:{{ pixel.thumbnail.width }}px;" />
                     </div>
                     <div class="large">
-                        <img id="zoom" src="{{ pixel.image.url }}" alt="" />
+                        <img id="zoom" src="{{ pixel.image.url }}" alt="" style="height:{{ pixel.image.height }}px;width:{{ pixel.image.width }}px;" />
                     </div>
+                </div>
+                <div>
+                    <a href="{{ pixel.image.url }}">Full size image</a>
                 </div>
             </div>
             <!-- RIGHT SIDE -->
