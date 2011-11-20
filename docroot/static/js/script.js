@@ -45,6 +45,10 @@ $(function(){
   
   
   $("#uploadform").submit(function(){
+    if(!$("input[type=file]").val()){
+      alert("Please select an image to upload!");
+      return false;
+    }
   	var $form = $(this);
   	$form.submit(function(){
   		return false
