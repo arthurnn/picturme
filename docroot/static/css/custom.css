@@ -36,7 +36,7 @@ footer {
     line-height: 20px;
     padding: 0 4px;
 }
-.pagination ul li span {
+.pagination ul li strong {
     float: left;
 }
 #metadata-container {
