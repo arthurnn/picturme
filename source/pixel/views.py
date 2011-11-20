@@ -20,7 +20,7 @@ from pixel.image2 import ImageTrans
 
 from pixel.models import UserImage,UserTiles
 
-import hashlib
+import hashlib, short_url
 
 @render_to('index.html')
 def home(request):
@@ -68,8 +68,11 @@ def upload(request):
 #        for a in arr:
 #            a.user_image=photo
 #            a.save()
+    
+    
+    url = short_url.encode_url(photo.id)
         
-    return redirect('/detail/%s'%photo.id)
+    return redirect('/d/%s'%url)
 
 
 @render_to('details.html')
@@ -78,6 +81,15 @@ def detail(request, image_id):
     return {'pixel':u}
     
 
+@render_to('details.html')
+def short(request,short_id):
+    
+    key = short_url.decode_url(short_id) 
+    u = get_object_or_404(UserImage,pk=long(key))
+    
+    return {'pixel':u}
+
+   
 @render_to('details_thumbnails.html')
 def thumbList(request, image_id):
     u = get_object_or_404(UserImage, pk=image_id)

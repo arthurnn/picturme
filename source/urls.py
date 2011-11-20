@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^detail/(?P<image_id>\d+)$', 'pixel.views.detail', name='detail'),
     url(r'^detail/thumbs/(?P<image_id>\d+)$', 'pixel.views.thumbList', name='thumbList'),
     
-    
+    url(r'^d/(?P<short_id>\w+)$', 'pixel.views.short', name='short'),
 
     url(r'^admin/', include(admin.site.urls)),
     
