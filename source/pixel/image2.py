@@ -78,7 +78,7 @@ def top_down(grid, output, tile_size):
             rgb = grid[yPos][xPos].color
             tile = image_list.search(rgb).image.blob
             
-             
+            tile.thumbnail(tile_size) 
             xy = (xPos * tile_size[0], yPos * tile_size[1])
             #print tile
             output.paste(tile, xy)
