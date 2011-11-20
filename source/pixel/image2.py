@@ -43,7 +43,7 @@ def top_down(grid, output, tile_size):
     
     size = 200
     mm = Pixel.objects.count()-size-1
-    if max > 10:
+    if mm > 10:
         index = random.randint(0,mm)
     else:
         index = 0
@@ -65,8 +65,6 @@ def top_down(grid, output, tile_size):
             #tile = image_list.search(rgb).image.blob
             tile_wrapper = image_list.search(rgb)
             tile_pixel = tile_wrapper.pixel
-            
-            
             #print tile_pixel.id
             tile = tile_wrapper.image
             
@@ -183,10 +181,15 @@ class ImageList(osaic.ImageList):
         self._img_list.setdefault(qcolor, list()).append(image)
                     
     def search(self, color):
-        """Search the most similar image in terms of average color."""
-        # first find the group of images having the same quantized
-        # average color.
         qcolor = osaic.quantize_color(color)
+        
+        pixel = Pixel.objects.filter(qr=qcolor[0],qg=qcolor[1],qb=qcolor[2])[:1]
+        if pixel.count() > 0:
+            pixel = pixel[0]
+            image = Image.open(StringIO(pixel.image1.file.read())) 
+            return ImageTuple(color, pixel, image)
+        
+        
         best_img_list = None
         best_dist = None
         for (img_list_color, img_list) in self._img_list.iteritems():
