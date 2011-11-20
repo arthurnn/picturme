@@ -77,7 +77,7 @@ def thumbList(request, image_id):
     q = u.usertiles_set.all()
     
     
-    paginator = Paginator(q, 16) # Show 13 per page
+    paginator = Paginator(q, 6) # Show 13 per page
     try:
         list_pag = paginator.page(request.GET.get('page', 1))
     except PageNotAnInteger:

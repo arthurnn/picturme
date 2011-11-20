@@ -1,0 +1,32 @@
+{% if page.paginator.num_pages > 1 %}
+	<div class="centerWrapper rightWrapper paginationContainer">
+		<ul class="pagination">
+			{% if page.has_previous %}
+				<li><a data-page="{{ page.previous_page_number }}" href="javascript:void(0);" class="prevPage">&lt;</a></li>
+			{% endif %}
+			
+			{% for pnum in begin %}
+				<li><a data-page="{{ pnum }}" {% if page.number == pnum %}class="current"{% endif %} href="javascript:void(0);">{{ pnum }}</a></li>
+			{% endfor %}
+			
+			{% if middle %}
+			    <strong>...</strong>
+			    {% for pnum in middle %}
+			        <li><a data-page="{{ pnum }}" {% if page.number == pnum %}class="current"{% endif %} href="javascript:void(0);">{{ pnum }}</a></li>
+			    {% endfor %}
+			{% endif %}
+
+
+			{% if end %}
+			    <strong>...</strong>
+			    {% for pnum in end %}
+			    	<li><a data-page="{{ pnum }}" {% if page.number == pnum %}class="current"{% endif %} href="javascript:void(0);">{{ pnum }}</a></li>
+			    {% endfor %}
+			{% endif %}
+
+			{% if page.has_next %}
+				<li><a data-page="{{ page.next_page_number }}" href="javascript:void(0);" class="nextPage">&gt;</a></li>
+			{% endif %}
+		</ul>
+	</div>
+{% endif %}

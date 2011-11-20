@@ -59,6 +59,9 @@ $(function(){
   })
   
   $(".zoom").anythingZoomer();
+  
+  
+  $("#thumbs_list").load('/detail/thumbs/3');
 
 });
 
