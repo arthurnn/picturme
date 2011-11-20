@@ -6,9 +6,10 @@
 {% endblock additional_headers %}
 
 {% block content %}
+	<div id="upload_container">
         <h1>pictur.me</h1>
         <p>upload your picture and get an awesome mosaic from <a href="http://500px.com">500px</a> images</p>
-        <form action="/upload/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <form id="uploadform" action="/upload/" method="POST" enctype="multipart/form-data">{% csrf_token %}
             <div>
                 <input type="file" name="file" value="go">
             </div>
@@ -18,4 +19,11 @@
                 <input type="reset" class="btn" value="naah, don't do nothing!">
             </div>
         </form>
+   </div>     
+        
+    <div id="load_container" style="display: none;">
+   		<h1 id="loader">...</h1>
+    	<p>your picture is being uploaded and generated. Please be patient, this can take a while...</p>
+    	
+    </div>
 {% endblock content %}

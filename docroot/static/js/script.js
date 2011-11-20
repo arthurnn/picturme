@@ -42,6 +42,25 @@ $(function(){
   $("#detail-url").ready(function(){
     $("#detail-url").val(location.href);
   });
+  
+  
+  $("#uploadform").submit(function(){
+  	var $form = $(this);
+  	$form.submit(function(){
+  		return false
+  	});
+  	$("#upload_container").hide();
+  	$("#load_container").show();
+  	
+  	this.submit();
+  	
+  	return true;
+  	
+  })
+  
+  
+  //$(".zoom").anythingZoomer();
+
 });
 
 var popup = function(url, title) {

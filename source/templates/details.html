@@ -6,6 +6,7 @@
 {% endblock additional_headers %}
 
 {% block content %}
+
     <section>
         <div class="show-grid row">
             <div class="span">
@@ -21,11 +22,12 @@
             </div>
         </div>
         <br />
+
         <div class="show-grid row">
             <!-- LEFT SIDE -->
             <div class="span9">
-                <div id="picture" width="500">
-                    <img src="{{ image.url }}" alt="" style="width: 500px" />
+                <div id="picture" class="zoom" width="500">
+                    <img id="zoom" src="{{ image.url }}" alt="" style="width: 500px" />
                 </div>
             </div>
             <!-- RIGHT SIDE -->
@@ -52,5 +54,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    
+	</section>
 {% endblock content %}
+
