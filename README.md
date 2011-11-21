@@ -1,10 +1,12 @@
 Pictur.me project
 =================
 
+http://pictur.me
+
 Authors
 -------
-@arthurnn
-<olivier_twitter>
+@arthurnn89
+@oliviernt
 
 What is included
 ----------------
