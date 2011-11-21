@@ -34,9 +34,10 @@ def upload(request):
     ff = request.FILES.get('file',False)
     if ff:
         imgFile = Image.open(StringIO(ff.read()))
+        imgFile = imgFile.convert('RGB')
+
         
         ap = ImageTrans()
-        
         #imgFile.thumbnail((500,500))
         (mosaic,arr) = ap.main(imgFile)
         
