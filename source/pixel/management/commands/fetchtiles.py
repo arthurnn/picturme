@@ -10,13 +10,13 @@ from django.db.models import Count
 from django.core.files.base import ContentFile
 
 from StringIO import StringIO
-import urllib,hashlib,osaic
+import urllib,hashlib
 from PIL import Image
 
 from fivehundred import FiveHundredPx
 
 from pixel.models import Pixel
-from pixel.image2 import average_color
+from pixel.image2 import average_color,quantize_color
 
 
 CONSUMER_KEY = 'HedA1jeHKM2KaXWIb1lPV9bIJJu9eIh84h2s613L'
@@ -53,7 +53,7 @@ class Command(BaseCommand):
             
             
             color = (r,g,b) = average_color(img)
-            (qr,qg,qb) = osaic.quantize_color(color)
+            (qr,qg,qb) = quantize_color(color)
             
             pixel.r=r
             pixel.g=g

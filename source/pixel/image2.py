@@ -6,7 +6,6 @@ Created on Nov 19, 2011
 import os, sys
 import Image
 import time
-import osaic
 import random
 from math import sqrt
 from PIL import Image
@@ -15,12 +14,11 @@ from StringIO import StringIO
 from collections import namedtuple
 from pixel.models import UserTiles
 from django.core.cache import cache
-
+import operator
 
 def create_mosaic(source_image):
         tile_size = (50,50)
         
-        #w = osaic.ImageWrapper(filename=source_image.filename, blob=source_image)
         copy = source_image.copy()
         copy.thumbnail((100,100))
         
@@ -84,7 +82,7 @@ def gen(cursor):
         #tile = Image.open(StringIO(photo.image1.file.read())) 
         #yield tile
         
-
+""" These methods are a variation of the osaic python api!  """
 def tilefy(img, tiles):
     matrix = [[None for i in xrange(tiles[0])] for j in xrange(tiles[1])]
     (width, height) = img.size
@@ -116,6 +114,37 @@ def average_color(img):
         b += many * cb
     return (r // n, g // n, b // n)
 
+def quantize_color(color):
+    levels = 8 
+    mode = 'middle'
+    
+    if mode == 'top':
+        inc = 256 // levels - 1
+    elif mode == 'middle':
+        inc = 256 // levels // 2
+    else: # 'bottom'
+        inc = 0
+
+    # first map each component from the range [0, 256[ to [0, levels[:
+    #       v * levels // 256
+    # then remap values to the range of default values [0, 256[, but
+    # this time instead of obtaining all the possible values, we get
+    # only discrete values:
+    #       .. * 256 // levels
+    # finally, depending on the specified mode, grab the bottom, middle
+    # or top value of the result range:
+    #       .. + inc
+    ret = [(v * levels) // 256 * (256 // levels) + inc for v in color]
+    return tuple(ret)
+
+def difference(vec1, vec2):
+    """Return difference between given vectors."""
+    return map(operator.sub, vec1, vec2)
+
+def squaredistance(vec1, vec2):
+    """Return the square distance between given vectors."""
+    return sum(v ** 2 for v in difference(vec1, vec2))
+
 class ImageTrans():
     def main(self, img):
         return create_mosaic(img)
@@ -125,7 +154,7 @@ class ImageTrans():
 ImageTuple = namedtuple('ImageTuple', 'color pixel image'.split())
 
 
-class ImageList(osaic.ImageList):
+class ImageList():
 
     def __init__(self, iterable=None):
         self._img_list = dict()
@@ -133,9 +162,7 @@ class ImageList(osaic.ImageList):
         for pixel in iterable:
             #pil_img.convert('RGB')
             
-            #img = osaic.ImageWrapper(filename=pil_img.filename,blob=pil_img)
 
-            #color = osaic.average_color(img)
             color = (pixel.r,pixel.g,pixel.b)
 
             image = Image.open(StringIO(pixel.image1.file.read())) 
@@ -162,7 +189,7 @@ class ImageList(osaic.ImageList):
         self._img_list.setdefault(qcolor, list()).append(image)
                     
     def search(self, color):
-        qcolor = osaic.quantize_color(color)
+        qcolor = quantize_color(color)
         
 #        pixel_id = cache.get('%d%d%d' % qcolor)
 #        if pixel_id is not None:
@@ -173,7 +200,7 @@ class ImageList(osaic.ImageList):
         best_img_list = None
         best_dist = None
         for (img_list_color, img_list) in self._img_list.iteritems():
-            dist = osaic.squaredistance(qcolor, img_list_color)
+            dist = squaredistance(qcolor, img_list_color)
             if dist==0:
                 best_img_list = img_list
                 break
@@ -185,7 +212,7 @@ class ImageList(osaic.ImageList):
         best_img = None
         best_dist = None
         for img_wrapper in best_img_list:
-            dist = osaic.squaredistance(color, img_wrapper.color)
+            dist = squaredistance(color, img_wrapper.color)
             if best_dist is None or dist < best_dist:
                 best_dist = dist
                 best_img = img_wrapper
