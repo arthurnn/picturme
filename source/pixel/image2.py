@@ -20,11 +20,11 @@ from django.core.cache import cache
 def create_mosaic(source_image):
         tile_size = (50,50)
         
-        w = osaic.ImageWrapper(filename=source_image.filename, blob=source_image)
+        #w = osaic.ImageWrapper(filename=source_image.filename, blob=source_image)
         copy = source_image.copy()
         copy.thumbnail((100,100))
         
-        source_grid = tilefy(w,copy.size)
+        source_grid = tilefy(source_image,copy.size)
         
         output_size = (len(source_grid[0]) * tile_size[0],
                        len(source_grid) * tile_size[1]) 
@@ -94,7 +94,7 @@ def tilefy(img, tiles):
         for (j, x) in enumerate(xrange(0, tile_width * tiles[0], tile_width)):
             rect = (x, y, x + tile_width, y + tile_height)
             tile = img.crop(rect)
-            matrix[i][j] = osaic.ImageTuple(img.filename, average_color(tile), None)
+            matrix[i][j] = ImageTuple(average_color(tile), None, None)
     return matrix
 
 def average_color(img):
