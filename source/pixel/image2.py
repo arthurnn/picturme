@@ -94,7 +94,7 @@ def tilefy(img, tiles):
         for (j, x) in enumerate(xrange(0, tile_width * tiles[0], tile_width)):
             rect = (x, y, x + tile_width, y + tile_height)
             tile = img.crop(rect)
-            matrix[i][j] = osaic.ImageTuple(img.filename, osaic.average_color(tile), None)
+            matrix[i][j] = osaic.ImageTuple(img.filename, average_color(tile), None)
     return matrix
 
 def average_color(img):
