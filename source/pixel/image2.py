@@ -98,13 +98,7 @@ def tilefy(img, tiles):
     return matrix
 
 def average_color(img):
-    """Return the average color of the given image.
-    
-    The calculus of the average color has been implemented by looking at
-    each pixel of the image and accumulate each rgb component inside
-    separate counters.
-    
-    """
+    """  Return the average color of the given image.  """
     (width, height) = img.size
     (n, r, g, b) = (0, 0, 0, 0)
     maxcolors = width*height
@@ -157,16 +151,7 @@ class ImageList(osaic.ImageList):
         return len(self._img_list)
 
     def _insert(self, image):
-        """Insert a new image in the list.
-        
-        Objects enqueued in the list are dictionaries containing the
-        minimal amount of meta-data required to handle images, namely the
-        name of the image, its average color (we cache the value), and
-        a blob object representing the raw processed image. Note that
-        after the application of the ``postfunc`` filter, it is possible
-        for the blob object to be None.
-
-        """
+        """ Insert a new image in the list. """
         # create two levels of hierarchy by first indexing group of
         # images having the same quantized average color.
         #qcolor = quantize_color(image.color)
