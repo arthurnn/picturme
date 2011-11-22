@@ -74,6 +74,8 @@ def mobileUpload(request):
         
         url = '/d/%s' % short_url.encode_url(photo.id)
         return {'success':True, 'url':url}
+    else:
+        return {'success':False}
     
 
 def upload(request):
