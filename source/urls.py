@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     url(r'^$', 'pixel.views.home', name='home'),
     
     url(r'^upload/$', 'pixel.views.upload',  name='upload'),
-    
+    url(r'^upload.ajax/$', 'pixel.views.mobileUpload'),
     
     url(r'^detail/(?P<image_id>\d+)$', 'pixel.views.detail', name='detail'),
     url(r'^detail/thumbs/(?P<image_id>\d+)$', 'pixel.views.thumbList', name='thumbList'),
