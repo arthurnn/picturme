@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.views.decorators.http import require_POST
 from django.shortcuts import render_to_response
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -63,6 +64,7 @@ def handleImage(imgFile):
     return photo
     
 
+@require_POST
 @ajax_request
 @csrf_exempt
 def mobileUpload(request):
