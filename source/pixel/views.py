@@ -65,8 +65,8 @@ def handleImage(imgFile):
     
 
 @require_POST
-@ajax_request
 @csrf_exempt
+@ajax_request
 def mobileUpload(request):
     ff = request.POST.get('file',False)
     if ff:
