@@ -43,14 +43,16 @@ def top_down(grid, output, tile_size):
     
     #cursor = Pixel.objects.all()
     
-    size = 500
-    mm = Pixel.objects.count()-size-1
-    if mm > 10:
-        index = random.randint(0,mm)
-    else:
-        index = 0
+#    size = 500
+#    mm = Pixel.objects.count()-size-1
+#    if mm > 10:
+#        index = random.randint(0,mm)
+#    else:
+#        index = 0
+#    
+#    cursor = Pixel.objects.all()[index:index+size]
     
-    cursor = Pixel.objects.all()[index:index+size]
+    cursor = Pixel.objects.all()
     
     #image_list = ImageList(gen(cursor))
     
