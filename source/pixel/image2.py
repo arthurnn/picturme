@@ -66,10 +66,13 @@ def top_down(grid, output, tile_size):
         for xPos, x in enumerate(grid[yPos]):
             #print counter, 
             rgb = grid[yPos][xPos].color
+            
+            qrgb = quantize_color(rgb)
+            
             #tile = image_list.search(rgb).image.blob
             #tile_wrapper = image_list.search(rgb)
             
-            w = image_list.query(query_point=rgb, t=1)
+            w = image_list.query(query_point=qrgb, t=1)
             
             tile_pixel = w[0]
             

@@ -19,7 +19,12 @@ class Pixel(models.Model):
     
     @property
     def color(self):
-        return (self.r,self.g,self.b) 
+        #return (self.r,self.g,self.b) 
+        return (self.qr,self.qg,self.qb) 
+    
+    @property
+    def qcolor(self):
+        return (self.qr,self.qg,self.qb) 
     
     @property
     def image(self):
