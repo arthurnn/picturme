@@ -75,7 +75,7 @@ def mobileUpload(request):
         photo = handleImage(imgFile)
         
         url = '/d/%s' % short_url.encode_url(photo.id)
-        return {'success':'True','url_path':url}
+        return {'success':'True','url_path':url, 'image_path': }
     else:
         return {'success':'False'}
     
