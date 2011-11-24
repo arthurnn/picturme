@@ -16,6 +16,8 @@ from pixel.models import UserTiles
 from django.core.cache import cache
 import operator
 
+from kdtree import KDTree
+
 def create_mosaic(source_image):
         tile_size = (50,50)
         
@@ -41,7 +43,7 @@ def top_down(grid, output, tile_size):
     
     #cursor = Pixel.objects.all()
     
-    size = 200
+    size = 500
     mm = Pixel.objects.count()-size-1
     if mm > 10:
         index = random.randint(0,mm)
@@ -50,7 +52,12 @@ def top_down(grid, output, tile_size):
     
     cursor = Pixel.objects.all()[index:index+size]
     
-    image_list = ImageList(gen(cursor))
+    #image_list = ImageList(gen(cursor))
+    
+    image_list = KDTree.construct_from_data(list(cursor))
+
+    #nearest = tree.query(query_point=(5,4,3), t=3)
+    
     
     _tile_list = dict()
     
@@ -60,10 +67,18 @@ def top_down(grid, output, tile_size):
             #print counter, 
             rgb = grid[yPos][xPos].color
             #tile = image_list.search(rgb).image.blob
-            tile_wrapper = image_list.search(rgb)
-            tile_pixel = tile_wrapper.pixel
+            #tile_wrapper = image_list.search(rgb)
+            
+            w = image_list.query(query_point=rgb, t=1)
+            
+            tile_pixel = w[0]
+            
+            #tile_pixel = tile_wrapper.pixel
             #print tile_pixel.id
-            tile = tile_wrapper.image
+            #tile = tile_wrapper.image
+            #tile = Image.open(StringIO(tile_pixel.image1.file.read())) 
+            tile = tile_pixel.image
+            
             
             tile.thumbnail(tile_size) 
             xy = (xPos * tile_size[0], yPos * tile_size[1])

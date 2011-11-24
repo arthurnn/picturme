@@ -1,5 +1,6 @@
 from django.db import models
-
+from PIL import Image
+from StringIO import StringIO
 
 class Pixel(models.Model):
     image1 = models.ImageField(upload_to='tiles/image1',null=False,blank=False)
@@ -13,7 +14,20 @@ class Pixel(models.Model):
     qr = models.PositiveIntegerField()
     qg = models.PositiveIntegerField()
     qb = models.PositiveIntegerField()
+
+    _image = None
     
+    @property
+    def color(self):
+        return (self.r,self.g,self.b) 
+    
+    @property
+    def image(self):
+        if self._image is None:
+            self._image = Image.open(StringIO(self.image1.file.read()))
+            
+        return self._image        
+        
     
 class UserImage(models.Model):
     pixels = models.ManyToManyField(Pixel, through='UserTiles')

@@ -45,7 +45,9 @@ class FiveHundredPx:
         
             response = _parse_json(file_resp.read())
         finally:
-            file_resp.close()
+            pass
+        
+            #file_resp.close()
         if response.get("error"):
             pass
             #raise APIError(response["error"], response["status"])
