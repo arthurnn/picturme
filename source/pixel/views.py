@@ -24,6 +24,10 @@ from pixel.models import UserImage,UserTiles
 
 import hashlib, short_url, base64
 
+
+import logging
+log = logging.getLogger('django.request')
+
 @render_to('index.html')
 def home(request):
     ids = [1,4,30,15,19]
@@ -71,6 +75,9 @@ def mobileUpload(request):
     ff = request.POST.get('file',False)
     if ff:
         s = base64.decodestring(ff)
+        log.info(s)
+        
+        
         imgFile = Image.open(StringIO(s))
         photo = handleImage(imgFile)
         
