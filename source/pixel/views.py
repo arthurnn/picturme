@@ -74,9 +74,7 @@ def handleImage(imgFile):
 def mobileUpload(request):
     ff = request.POST.get('file',False)
     if ff:
-        log.error("error: %s" % ff)
-        
-        s = base64.decodestring(str(ff))
+        s = base64.decodestring(ff)
         imgFile = Image.open(StringIO(s))
         photo = handleImage(imgFile)
         
@@ -88,7 +86,7 @@ def mobileUpload(request):
 
 @csrf_exempt
 def upload(request):
-    log.error('Raw Data: "%s"' % request.raw_post_data)
+    log.error('Raw Data: "%s"' % str(request.raw_post_data))
     
     ff = request.FILES.get('file',False)
     if ff:
