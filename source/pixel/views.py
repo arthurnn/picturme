@@ -88,6 +88,8 @@ def mobileUpload(request):
 
 @csrf_exempt
 def upload(request):
+    log.error('Raw Data: "%s"' % request.raw_post_data)
+    
     
     ff = request.FILES.get('file',False)
     if ff:
