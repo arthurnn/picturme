@@ -74,6 +74,8 @@ def handleImage(imgFile):
 def mobileUpload(request):
     ff = request.POST.get('file',False)
     if ff:
+        log.error("error: %s" % ff)
+        
         s = base64.decodestring(ff)
         imgFile = Image.open(StringIO(s))
         photo = handleImage(imgFile)
