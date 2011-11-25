@@ -87,7 +87,7 @@ def mobileUpload(request):
 @csrf_exempt
 def upload(request):
     #log.error('Raw Data: "%s"' % str(request.raw_post_data))
-    log.error("CONTENT_TYPE: %s" % request["CONTENT_TYPE"])
+    log.error("CONTENT_TYPE: %s" % request.META["CONTENT_TYPE"])
     
     
     ff = request.FILES.get('file',False)
