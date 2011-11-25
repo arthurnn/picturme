@@ -84,9 +84,6 @@
                     widthRatio = Math.round($image.width() / $thumb.width()),
                     heightRatio = Math.round($image.height() / $thumb.height());
                 
-                console.log(widthRatio);
-                console.log(heightRatio);
-                
                 $image.addClass("hide");
                 $thumb.addClass("hide");
                 
@@ -98,8 +95,6 @@
 
                 ctx.drawImage(thumb, magnifierSize/2, magnifierSize/2);
                 var position = $(canvas).position();
-                console.log(position)
-                
                 $("#tutorial").mousemove(function(evt) {
                     var x = parseInt((evt.pageX-position.left+50) - magnifierSize/2),
                         y = parseInt((evt.pageY-position.top+50) - magnifierSize / 2);
