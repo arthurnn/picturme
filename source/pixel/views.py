@@ -90,7 +90,6 @@ def mobileUpload(request):
 def upload(request):
     log.error('Raw Data: "%s"' % request.raw_post_data)
     
-    
     ff = request.FILES.get('file',False)
     if ff:
         imgFile = Image.open(StringIO(ff.read()))
