@@ -76,6 +76,14 @@ def mobileUpload(request):
     if ff:
         s = base64.decodestring(ff)
         imgFile = Image.open(StringIO(s))
+    else:
+        ff = request.FILES.get('file',False)
+        if ff:
+            imgFile = Image.open(StringIO(ff.read()))
+    
+    if imgFile:
+        #s = base64.decodestring(ff)
+        #imgFile = Image.open(StringIO(s))
         photo = handleImage(imgFile)
         
         url = '/d/%s' % short_url.encode_url(photo.id)
@@ -84,12 +92,7 @@ def mobileUpload(request):
         return {'success':'False'}
     
 
-@csrf_exempt
 def upload(request):
-    #log.error('Raw Data: "%s"' % str(request.raw_post_data))
-    #log.error("CONTENT_TYPE: %s" % request.META["CONTENT_TYPE"])
-    
-    
     ff = request.FILES.get('file',False)
     if ff:
         imgFile = Image.open(StringIO(ff.read()))
