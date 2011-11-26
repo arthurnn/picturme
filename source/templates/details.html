@@ -14,21 +14,21 @@
     <section>
         <div class="show-grid row">
             <div class="span">
-                <p>That's the resulting mosaic. Do you like it?</p>
+                <p>Here's the resulting mosaic! Do you like it?</p>
                 <details open>
                     <summary>Yes!</summary>
-                    <p>Share it with the url: <input type="text" id="detail-url" value="{{short_url}}" /> or directly share to: <a href="https://twitter.com/share" class="share-tw" title="Twitter">Twitter</a> and <a href="#" class="share-fb">Facebook</a></p>
+                    <p>Share this via email or IM by copying the following URL: <input type="text" id="detail-url" value="{{short_url}}" /> or directly share to: <a href="https://twitter.com/share" class="share-tw" title="Twitter">Twitter</a> and <a href="#" class="share-fb">Facebook</a></p>
                 </details>
                 <details>
                     <summary>No!</summary>
-                    <p>Well that's sad but why don't you give it another try... <a href="{% url home %}">retry</a></p>
+                    <p>Well that's sad but why don't you give it another try? <a href="{% url home %}">retry!</a></p>
                 </details>
             </div>
         </div>
         <br />
         <div class="show-grid row">
             <div class="span5 offset9">
-                <p>Those are the tiles from <a href="//500px.com">500px</a>:</p> 
+                <p>These are the tiles from <a href="//500px.com">500px</a>:</p> 
             </div>
         </div>
         <div class="show-grid row">
@@ -66,6 +66,7 @@
         })
         .appendTo("#picture .large");
         $("#image").load(function() {
+        	$(this).addClass("hide");
         	$("<canvas />").attr("id", "tutorial").css({
         		postition: "relative",
         		display: "block",
@@ -84,7 +85,6 @@
                     widthRatio = Math.round($image.width() / $thumb.width()),
                     heightRatio = Math.round($image.height() / $thumb.height());
                 
-                $image.addClass("hide");
                 $thumb.addClass("hide");
                 
                 width = width > 0 ? width : 600;
@@ -110,6 +110,8 @@
                   $(".zoom").anythingZoomer({
                     switchEvent: false
                   });
+                  // unhide the image
+                  $image.removeClass("hide");
             }
         }); 
     });
