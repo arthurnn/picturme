@@ -38,7 +38,7 @@
                     <div class="small">
                         <img id="zoom" src="{{ pixel.thumbnail.url }}" alt="" style="height:{{ pixel.thumbnail.height }}px;width:{{ pixel.thumbnail.width }}px;" />
                     </div>
-                    <div class="large">
+                    <div class="large hide">
                     </div>
                 </div>
                 <div>
@@ -66,7 +66,7 @@
         })
         .appendTo("#picture .large");
         $("#image").load(function() {
-        	$(this).addClass("hide");
+        	//$(this).addClass("hide");
         	$("<canvas />").attr("id", "tutorial").css({
         		postition: "relative",
         		display: "block",
