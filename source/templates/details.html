@@ -66,6 +66,7 @@
         })
         .appendTo("#picture .large");
         $("#image").load(function() {
+        	$(this).addClass("hide");
         	$("<canvas />").attr("id", "tutorial").css({
         		postition: "relative",
         		display: "block",
@@ -84,7 +85,6 @@
                     widthRatio = Math.round($image.width() / $thumb.width()),
                     heightRatio = Math.round($image.height() / $thumb.height());
                 
-                $image.addClass("hide");
                 $thumb.addClass("hide");
                 
                 width = width > 0 ? width : 600;
@@ -110,6 +110,8 @@
                   $(".zoom").anythingZoomer({
                     switchEvent: false
                   });
+                  // unhide the image
+                  $image.removeClass("hide");
             }
         }); 
     });
