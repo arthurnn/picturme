@@ -61,10 +61,6 @@ $(function(){
   	
   	return true;
   	
-  })
-  
-  $(".zoom").anythingZoomer({
-    switchEvent: false
   });
   
   var id = $("#picture").data('picture-id');

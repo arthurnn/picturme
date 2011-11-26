@@ -39,7 +39,6 @@
                         <img id="zoom" src="{{ pixel.thumbnail.url }}" alt="" style="height:{{ pixel.thumbnail.height }}px;width:{{ pixel.thumbnail.width }}px;" />
                     </div>
                     <div class="large">
-                        <img id="zoom" src="{{ pixel.image.url }}" alt="" style="height:{{ pixel.image.height }}px;width:{{ pixel.image.width }}px;" />
                     </div>
                 </div>
                 <div>
@@ -53,4 +52,67 @@
     
 	</section>
 {% endblock content %}
+
+{% block template_script %}
+    <script>
+    $(function(){
+        $("<img />")
+        .attr("alt", "")
+        .attr("id", "image")
+        .attr("src", "{{ pixel.image.url }}")
+        .css({
+            height: "{{ pixel.image.height }}px",
+            width: "{{ pixel.image.width }}px"
+        })
+        .appendTo("#picture .large");
+        $("#image").load(function() {
+        	$("<canvas />").attr("id", "tutorial").css({
+        		postition: "relative",
+        		display: "block",
+        		margin: "-50px 0 0 -50px"
+        	}).appendTo("#picture");
+            var canvas = document.getElementById("tutorial");
+            if (canvas.getContext) {
+                var $image = $("#picture .large img"),
+                    $thumb = $("#picture .small img"),
+                    image = $image[0],
+                    thumb = $thumb[0],
+                    width = $thumb.width(),
+                    height = $thumb.height(),
+                    ctx = canvas.getContext("2d"),
+                    magnifierSize = 100,
+                    widthRatio = Math.round($image.width() / $thumb.width()),
+                    heightRatio = Math.round($image.height() / $thumb.height());
+                
+                $image.addClass("hide");
+                $thumb.addClass("hide");
+                
+                width = width > 0 ? width : 600;
+                height = height > 0 ? height : 600;
+                
+                canvas.setAttribute("width", width + magnifierSize);
+                canvas.setAttribute("height", height + magnifierSize);
+
+                ctx.drawImage(thumb, magnifierSize/2, magnifierSize/2);
+                var position = $(canvas).position();
+                $("#tutorial").mousemove(function(evt) {
+                    var x = parseInt((evt.pageX-position.left+50) - magnifierSize/2),
+                        y = parseInt((evt.pageY-position.top+50) - magnifierSize / 2);
+                    ctx.clearRect(0, 0, width + magnifierSize, height + magnifierSize);
+                    ctx.drawImage(thumb, magnifierSize/2, magnifierSize/2);
+                    try {
+                        ctx.drawImage(image, x*widthRatio, y*heightRatio, magnifierSize, magnifierSize, x, y, magnifierSize, magnifierSize);
+                    } catch (e) {
+                    }
+                });
+            } else {
+                  //browser doesn't support canvas
+                  $(".zoom").anythingZoomer({
+                    switchEvent: false
+                  });
+            }
+        }); 
+    });
+    </script>
+{% endblock %}
 
