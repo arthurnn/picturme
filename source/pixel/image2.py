@@ -76,11 +76,12 @@ def top_down(grid, output, tile_size):
             #tile = image_list.search(rgb).image.blob
             #tile_wrapper = image_list.search(rgb)
             
-            w = image_list.query(query_point=qrgb, t=1)
+            t = random.randint(1,4)
+            w = image_list.query(query_point=qrgb, t=t)
             
-            #i = random.randint(0,len(w)-1)
+            i = random.randint(0,len(w)-1)
             
-            tile_pixel = w[0]
+            tile_pixel = w[i]
             
             #tile_pixel = tile_wrapper.pixel
             #print tile_pixel.id
