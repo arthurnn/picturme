@@ -1,5 +1,5 @@
 /*
-Author: @oliviernt , @arthurnn
+Author: @oliviernt , @arthurnn89
 */
 var Context = (function($){
 	

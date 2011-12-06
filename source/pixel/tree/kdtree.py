@@ -4,6 +4,8 @@
 """ 
 KDTree implementation, Modified to hold also the domain info
 
+by @arthurnn89
+
 Features:
 
 - nearest neighbours search
