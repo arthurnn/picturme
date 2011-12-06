@@ -3,6 +3,9 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
+from pixel import tree
+tree.autodiscover()
+
 urlpatterns = patterns('',
     url(r'^$', 'pixel.views.home', name='home'),
     
