@@ -75,22 +75,25 @@ var Context = (function($){
 	
 							// add event listener
 							mediaElement.addEventListener('ended', function(e) {
-								__context.home.fadeOutVideo();
+								__context.home.fadeOutVideo(mediaElement);
 							}, false);
 	
 							mediaElement.play();
 	
 						}
 					});
-					$("#splashContainer").bind('click', __context.home.fadeOutVideo);
+					$("#splashContainer").bind('click', function(){
+						__context.home.fadeOutVideo(videoSplash);
+					});
 				}
 
 				
 			},
-			fadeOutVideo : function(){
+			fadeOutVideo : function(mediaElement){
 				$("#splashContainer").fadeOut(function(){
 					$(".hero-unit").css('padding','60px');
 					$("#upload_container").show();
+					mediaElement.stop();
 				});
 			}
 		},
