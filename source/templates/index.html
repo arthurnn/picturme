@@ -5,9 +5,33 @@
     <title>pictur.me | home</title>
 {% endblock additional_headers %}
 
+{% block body_att %}data-controller="home"{% endblock body_att %}
+
 {% block content %}
+
+	{% if show_video %}
+
+	<div id="splashContainer">			
+		<video id="videoSplash">
+		    <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+		    <source type="video/mp4" src="{{ STATIC_URL }}video/splash.mp4" />
+		    <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+		    <source type="video/webm" src="{{ STATIC_URL }}video/splash.webm" />
+		    <!-- Ogg/Vorbis for older Firefox and Opera versions -->
+		    <source type="video/ogg" src="{{ STATIC_URL }}video/splash.ogv" />
+		    <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
+		    <object width="940" height="528" type="application/x-shockwave-flash" data="{{ STATIC_URL }}mediaelement/flashmediaelement.swf">
+		        <param name="movie" value="{{ STATIC_URL }}mediaelement/flashmediaelement.swf" />
+		        <param name="flashvars" value="file={{ STATIC_URL }}video/splash.mp4" />
+		    </object>
+		</video>
+		<p><a href="javascript:void(0);">Click in the video to hide it.</a></p>
+	</div>
+
+	{% endif %}
+
 	<div id="upload_container">
-        <h1><a href="/">pictur.me</a></h1>
+        <h1><a href="/?novideo=true">pictur.me</a></h1>
         <p>upload your picture and get an awesome mosaic from <a href="http://500px.com">500px</a> images</p>
         <form id="uploadform" action="/upload/" method="POST" enctype="multipart/form-data">{% csrf_token %}
             <div>

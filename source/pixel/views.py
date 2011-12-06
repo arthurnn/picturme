@@ -32,7 +32,10 @@ log = logging.getLogger('django.request')
 def home(request):
     ids = [1,4,30,15,19]
     ii = UserImage.objects.filter(id__in=ids)
-    return {'images':ii}
+    
+    novideo = request.GET.get('novideo',False)
+    
+    return {'images':ii, 'show_video': not novideo}
     
 
 def handleImage(imgFile):
