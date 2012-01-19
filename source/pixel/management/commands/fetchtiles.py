@@ -41,11 +41,11 @@ class Command(BaseCommand):
             fileIm = urllib.urlopen(url)
         
             im = StringIO(fileIm.read())
-			try:
-            	img = Image.open(im)
-			except:
-				print 'problem featching image path: %s' % (url)
-				continue
+            try:
+              img = Image.open(im)
+            except:
+			  print 'problem featching image path: %s' % (url)
+			  continue
             
             
             pixel = Pixel()
