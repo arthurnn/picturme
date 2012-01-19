@@ -1,5 +1,3 @@
-
-
 import urllib
 
 # Find a JSON parser
@@ -23,11 +21,7 @@ class FiveHundredPx:
         self.consumer_key = consumer_key
 
     def request(self, path, args=None, post_args=None):
-        """Fetches the given path in the Graph API.
-
-        We translate args to a valid query string. If post_args is given,
-        we send a POST request to the given path with the given arguments.
-        """
+        
         if not args: args = {}
         if self.consumer_key:
             if post_args is not None:
@@ -39,7 +33,6 @@ class FiveHundredPx:
         
         try:
             
-            print 'log path: %s' % (FiveHundredPx.BASE_URL + path + "?" + urllib.urlencode(args))
             file_resp = urllib.urlopen(FiveHundredPx.BASE_URL + path + "?" +
                               urllib.urlencode(args), post_data)
         
@@ -47,27 +40,30 @@ class FiveHundredPx:
         finally:
             file_resp.close()
 
-        if response.get("error"):
-            pass
-            #raise APIError(response["error"], response["status"])
-            
         return response
 
-    def get_photos(self,feature='editors'):
+    def get_photos(self, feature='editors', limit=200):
         args = {"feature": feature}
         
         data = self.request('/photos', args)
         total_pages = data['total_pages']
+        count = 0
         
         page = data['current_page']
         
         while page <= total_pages:
         
             for p in data['photos']:
+                count = count+1
+                if count > limit: return
                 yield p
             
             args['page'] = page = page+1
             data = self.request('/photos', args)
+            
+    def get_photo(self, id, args = None):
+        data = self.request('/photos/%d' % id, args)
+        return data
         
         
             

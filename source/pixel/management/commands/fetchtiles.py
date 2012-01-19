@@ -29,23 +29,18 @@ class Command(BaseCommand):
         
         api = FiveHundredPx(CONSUMER_KEY)
         
-        iiter = api.get_photos(feature = args[0])
+        iiter = api.get_photos(feature = args[0], limit=1000)
         
-        count = 0
         for p in iiter:
-            if count>1000:
-                break
-            count += 1
-            
             url = p['image_url']
             fileIm = urllib.urlopen(url)
         
             im = StringIO(fileIm.read())
             try:
-              img = Image.open(im)
+                img = Image.open(im)
             except:
-			  print 'problem featching image path: %s' % (url)
-			  continue
+			    print 'problem featching image path: %s' % (url)
+			    continue
             
             
             pixel = Pixel()
