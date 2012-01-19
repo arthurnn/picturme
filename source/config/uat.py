@@ -45,6 +45,9 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 STATIC_URL = 'http://%s/static/' % 's3.amazonaws.com/picturme_bucket'
 
+MEDIA_ROOT = '/home/ubuntu/projects/picturme/media/'
+MEDIA_URL = '/media/'
+
 ADMIN_MEDIA_PREFIX = 'http://%s/admin/' % AWS_S3_CUSTOM_DOMAIN
 
 STATICFILES_DIRS = (

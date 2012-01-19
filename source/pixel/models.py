@@ -1,11 +1,11 @@
 from django.db import models
 from PIL import Image
 from StringIO import StringIO
+from django.core.files.storage import FileSystemStorage
 
 class Pixel(models.Model):
-    image1 = models.ImageField(upload_to='tiles/image1',null=False,blank=False)
+    image1 = models.ImageField(storage=FileSystemStorage(),upload_to='tiles/image1',null=False,blank=False)
     url = models.URLField(null=True,blank=True)
-    
     
     r = models.PositiveIntegerField()
     g = models.PositiveIntegerField()

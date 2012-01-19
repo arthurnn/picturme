@@ -52,7 +52,7 @@ def top_down(grid, output, tile_size):
 #    
 #    cursor = Pixel.objects.all()[index:index+size]
     
-    cursor = Pixel.objects.all()
+    #cursor = Pixel.objects.all()
     
     #image_list = ImageList(gen(cursor))
     
