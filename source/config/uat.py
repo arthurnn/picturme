@@ -40,8 +40,7 @@ AWS_S3_CUSTOM_DOMAIN = 's3.amazonaws.com/picturme_bucket'
 
 
 # There is no MEDIA URL/ROOT or STATIC_ROOT because is using a different Storage
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 STATIC_URL = 'http://%s/static/' % 's3.amazonaws.com/picturme_bucket'
 

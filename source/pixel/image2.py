@@ -73,9 +73,6 @@ def top_down(grid, output, tile_size):
             
             qrgb = quantize_color(rgb)
             
-            #tile = image_list.search(rgb).image.blob
-            #tile_wrapper = image_list.search(rgb)
-            
             w = image_list.query(query_point=qrgb, t=1)
             
             #i = random.randint(0,len(w)-1)
