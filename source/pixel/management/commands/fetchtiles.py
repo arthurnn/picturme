@@ -19,15 +19,13 @@ from pixel.models import Pixel
 from pixel.image2 import average_color,quantize_color
 
 
-CONSUMER_KEY = 'HedA1jeHKM2KaXWIb1lPV9bIJJu9eIh84h2s613L'
-
 class Command(BaseCommand):
     help = "Cron job to fetch images"
     
     def handle(self, *args, **options):
         #t0 = datetime.datetime.now()
         
-        api = FiveHundredPx(CONSUMER_KEY)
+        api = FiveHundredPx(settings.PX_CONSUMER_KEY)
         
         iiter = api.get_photos(feature = args[0], limit=1000)
         

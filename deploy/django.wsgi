@@ -15,6 +15,7 @@ _application = WSGIHandler()
 def application(environ, start_response):
   os.environ['AWS_ACCESS_KEY_ID'] = environ['AWS_ACCESS_KEY_ID']
   os.environ['AWS_SECRET_ACCESS_KEY'] = environ['AWS_SECRET_ACCESS_KEY']
+  os.environ['PX_CONSUMER_KEY'] = environ['PX_CONSUMER_KEY']
   os.environ['DB_PASS'] = environ['DB_PASS']
   os.environ['DJANGO_ENV'] = environ['DJANGO_ENV']
   return _application(environ, start_response)

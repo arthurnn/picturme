@@ -51,3 +51,4 @@ STATICFILES_DIRS = (
     ("static", "/home/ubuntu/projects/picturme/docroot/static"),
 )
 
+PX_CONSUMER_KEY = os.getenv('PX_CONSUMER_KEY', default=None)
