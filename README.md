@@ -5,7 +5,7 @@ http://pictur.me
 
 Authors
 -------
-@arthurnn89
+@arthurnn
 @oliviernt
 
 What is included
