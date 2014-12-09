@@ -3,8 +3,8 @@ import sys, os
 from boto.s3.key import Key
 
 LOCAL_PATH = '/home/vagrant/projects/picturme/'
-AWS_ACCESS_KEY_ID = 'AKIAIC6VFIJCTGUNGU4A'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', default=None)
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', default=None)
 
 bucket_name = 'picturme_bucket'
 # connect to the bucket
