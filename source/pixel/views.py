@@ -33,9 +33,7 @@ def home(request):
     ids = [1,4,30,15,19]
     ii = UserImage.objects.filter(id__in=ids)
     
-    novideo = request.GET.get('novideo',False)
-    
-    return {'images':ii, 'show_video': not novideo}
+    return {'images':ii}
     
 
 def handleImage(imgFile):
