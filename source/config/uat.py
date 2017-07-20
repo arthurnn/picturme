@@ -15,7 +15,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'picturme',
-        'USER': 'root',
+        'USER': 'picturme',
         'PASSWORD': os.getenv('DB_PASS', default=None),
         'HOST': '',
         'PORT': '',
