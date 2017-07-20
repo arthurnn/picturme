@@ -4,7 +4,6 @@ Created on Nov 19, 2011
 @author: arthurnn
 '''
 import os, sys
-import Image
 import time
 import random
 from math import sqrt
