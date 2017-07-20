@@ -48,7 +48,7 @@ MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = 'http://%s/admin/' % AWS_S3_CUSTOM_DOMAIN
 
 STATICFILES_DIRS = (
-    ("static", "/root/src/picturme/source/docroot/static"),
+    ("static", "/root/src/picturme/static"),
 )
 
 PX_CONSUMER_KEY = os.getenv('PX_CONSUMER_KEY', default=None)
