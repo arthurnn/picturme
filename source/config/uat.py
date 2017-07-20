@@ -42,13 +42,13 @@ STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoSto
 
 STATIC_URL = 'http://%s/static/' % 's3.amazonaws.com/picturme_bucket'
 
-MEDIA_ROOT = '/root/src/picturme/media/'
+MEDIA_ROOT = '/root/src/picturme/shared/media/'
 MEDIA_URL = '/media/'
 
 ADMIN_MEDIA_PREFIX = 'http://%s/admin/' % AWS_S3_CUSTOM_DOMAIN
 
 STATICFILES_DIRS = (
-    ("static", "/root/src/picturme/static"),
+    ("static", "/root/src/picturme/shared/static"),
 )
 
 PX_CONSUMER_KEY = os.getenv('PX_CONSUMER_KEY', default=None)
